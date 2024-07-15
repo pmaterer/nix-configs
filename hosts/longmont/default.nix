@@ -50,7 +50,6 @@
     ntp.enable = true;
     blueman.enable = true;
   };
-  printing.enable = true;
   sound.enable = true;
   hardware = {
     bluetooth.enable = true;
