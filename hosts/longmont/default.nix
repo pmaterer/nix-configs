@@ -1,8 +1,6 @@
 { pkgs, config, lib, ... }: {
 
-  imports = [ 
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
   boot = {
     loader = {
@@ -25,6 +23,9 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   services = {
+    displayManager = {
+      defaultSession = "xfce"; # or "none+i3"
+    };
     xserver = {
       enable = true;
       xkb = {
@@ -32,16 +33,13 @@
         options = "caps:escape";
       };
 
-      displayManager = {
-        defaultSession = "xfce"; # or "none+i3"
-        lightdm.enable = true;
-      };
+      displayManager = { lightdm.enable = true; };
 
       desktopManager.xfce.enable = true;
 
       windowManager.i3 = {
         enable = true;
-        extraPackages = with pkgs; [ demu i3status i3lock ];
+        extraPackages = with pkgs; [ dmenu i3status i3lock ];
       };
       videoDrivers = [ "nvidia" ];
     };
@@ -50,13 +48,13 @@
     ntp.enable = true;
     blueman.enable = true;
   };
-  sound.enable = true;
+
   hardware = {
     bluetooth.enable = true;
     pulseaudio.enable = true;
-    opengl = {
+    graphics = {
       enable = true;
-      driSupport32Bit = true;
+      enable32Bit = true;
     };
     nvidia = {
       modesetting.enable = true;

@@ -51,27 +51,25 @@
         ];
       };
 
-      nixosConfigurations = {
-        longmont = let
-          username = "patrick";
-          system = "x86_64-linux";
-          overlays = [ neovim-nightly-overlay.overlays.default ];
-        in nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/longmont
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.${username} = import ./home;
-              };
-            }
-            { nixpkgs.overlays = overlays; }
-          ];
-        };
+      nixosConfigurations.longmont = let
+        username = "patrick";
+        system = "x86_64-linux";
+        overlays = [ neovim-nightly-overlay.overlays.default ];
+      in nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./hosts/longmont
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit nixvim; };
+              users.${username} = import ./home;
+            };
+          }
+          { nixpkgs.overlays = overlays; }
+        ];
       };
     };
-
 }

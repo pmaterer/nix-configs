@@ -1,5 +1,7 @@
 { pkgs, config, nixvim, ... }: {
 
+  imports = [ nixvim.homeManagerModules.nixvim ];
+
   home = {
     stateVersion = "23.05";
     preferXdgDirectories = true;
@@ -81,8 +83,6 @@
       gh
     ];
   };
-
-  imports = [ nixvim.homeManagerModules.nixvim ];
 
   xdg = {
     enable = true;

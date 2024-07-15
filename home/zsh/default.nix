@@ -58,6 +58,6 @@
     AWS_CA_BUNDLE = "/Users/pmaterer/FW_BUNDLE.crt";
     NODE_EXTRA_CA_CERTS = "/Users/pmaterer/FW_BUNDLE.crt";
     AWS_DEFAULT_REGION = "us-east-1";
-    NIX_PATH = "nixpkgs=https://nixos.org/channels/nixpkgs-unstable";
+    # NIX_PATH = "nixpkgs=https://nixos.org/channels/nixpkgs-unstable";
   };
 }
