@@ -12,11 +12,14 @@
   history.path = "${config.xdg.dataHome}/zsh/history";
 
   initExtra = ''
-    . ~/.secrets.zsh
+    if [ -f ~/.secrets.zsh]; then
+      . ~/.secrets.zsh
+    fi
 
     source <(kubectl completion zsh)
 
-    . "$HOME/.asdf/asdf.sh"
+    . "${pkgs.asdf-vm}/share/asdf-vm/asdf.sh"
+    . "${pkgs.asdf-vm}/share/asdf-vm/completions/asdf.bash"
 
     export PATH=$PATH:~/.npm/bin
 
@@ -58,6 +61,5 @@
     AWS_CA_BUNDLE = "/Users/pmaterer/FW_BUNDLE.crt";
     NODE_EXTRA_CA_CERTS = "/Users/pmaterer/FW_BUNDLE.crt";
     AWS_DEFAULT_REGION = "us-east-1";
-    # NIX_PATH = "nixpkgs=https://nixos.org/channels/nixpkgs-unstable";
   };
 }

@@ -57,6 +57,7 @@
       awscli
 
       # k8s
+      kubectl
       kubernetes-helm
       kubectx
       argo
@@ -82,6 +83,8 @@
       skate
 
       gh
+
+      asdf-vm
     ];
   };
 
