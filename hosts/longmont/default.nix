@@ -35,7 +35,12 @@
 
       displayManager = { lightdm.enable = true; };
 
-      desktopManager.xfce.enable = true;
+      desktopManager = {
+        xfce.enable = true;
+        lumina.enable = true;
+        pantheon.enable = true;
+        plasma5.enable = true;
+      };
 
       windowManager.i3 = {
         enable = true;
@@ -50,7 +55,10 @@
   };
 
   hardware = {
-    bluetooth.enable = true;
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
     pulseaudio.enable = true;
     graphics = {
       enable = true;

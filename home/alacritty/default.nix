@@ -4,7 +4,6 @@
   settings = {
     import = [ "~/.config/alacritty/theme.toml" ];
     window = {
-      decorations = "none";
       dimensions = {
         columns = 150;
         lines = 50;
@@ -15,7 +14,7 @@
       };
     };
     font = {
-      size = 14.0;
+      size = 12.0;
       normal = {
         family = "Iosevka Nerd Font Mono";
         style = "Regular";

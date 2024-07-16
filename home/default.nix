@@ -29,6 +29,7 @@
       imagemagick
       curl
       gnutar
+      gnumake
 
       glow
 
