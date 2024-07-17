@@ -42,6 +42,7 @@
       "wireshark"
       "xscreensaver"
       "notion"
+      "stats"
     ];
   };
 
