@@ -37,7 +37,6 @@
         # git
         ghorg
         pre-commit
-        gh
         glab
 
         # development
@@ -101,6 +100,9 @@
     direnv = {
       enable = true;
       nix-direnv.enable = true;
+    };
+    gh = {
+      enable = true;
     };
     go = {
       enable = true;
