@@ -17,10 +17,11 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hosts = { url = "github:StevenBlack/hosts"; };
   };
 
   outputs = { self, nixpkgs, nix-darwin, home-manager, nixvim
-    , neovim-nightly-overlay }: {
+    , neovim-nightly-overlay, hosts }: {
 
       # work
       darwinConfigurations.Patricks-MacBook-Pro = let
@@ -71,6 +72,8 @@
             };
           }
           { nixpkgs.overlays = overlays; }
+          hosts.nixosModule
+          { networking.stevenBlackHosts.enable = true; }
         ];
       };
     };

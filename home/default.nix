@@ -77,10 +77,7 @@
         pop
         gum
         skate
-      ] ++ (if pkgs.stdenv.isLinux then
-        with pkgs; [ terraform-docs ]
-      else
-        [ ]);
+      ] ++ (if pkgs.stdenv.isLinux then with pkgs; [ terraform-docs ] else [ ]);
   };
 
   xdg = {
@@ -101,9 +98,7 @@
       enable = true;
       nix-direnv.enable = true;
     };
-    gh = {
-      enable = true;
-    };
+    gh = { enable = true; };
     go = {
       enable = true;
       goBin = ".local/bin.go";
