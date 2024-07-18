@@ -37,6 +37,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               verbose = true;
+              backupFileExtension = "hm-backup";
               extraSpecialArgs = { inherit nixvim; };
               users.${username} = import ./home;
             };
@@ -64,6 +65,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              backupFileExtension = "hm-backup";
               extraSpecialArgs = { inherit nixvim; };
               users.${username} = import ./home;
             };

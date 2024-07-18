@@ -8,7 +8,32 @@
       [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
     initrd.kernelModules = [ ];
     kernelModules = [ "kvm-intel" ];
+    # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/thinkpad/p1/default.nix
+    # Need to set Thunderbolt to "BIOS Assist Mode"
+    # https://forums.lenovo.com/t5/Other-Linux-Discussions/T480-CPU-temperature-and-fan-speed-under-linux/m-p/4114832
+    kernelParams = [ "acpi_backlight=native" ];
     extraModulePackages = [ ];
+  };
+
+  hardware = {
+    graphics = {
+      enable = lib.mkDefault true;
+      enable32Bit = lib.mkDefault true;
+    };
+    nvidia = {
+      modesetting.enable = lib.mkDefault true;
+      open = true;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      prime = {
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
+        intelBusId = lib.mkDefault "PCI:0:2:0";
+        nvidiaBusId = lib.mkDefault "PCI:1:0:0";
+      };
+    };
   };
 
   fileSystems."/" = {

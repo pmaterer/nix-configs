@@ -12,9 +12,7 @@
   history.path = "${config.xdg.dataHome}/zsh/history";
 
   initExtra = ''
-    if [ -f ~/.secrets.zsh]; then
-      . ~/.secrets.zsh
-    fi
+    [[ -f $HOME/.secrets.zsh ]] && source $HOME/.secrets.zsh
 
     source <(kubectl completion zsh)
 
@@ -32,6 +30,8 @@
     diff = "${pkgs.colordiff}/bin/colordiff";
 
     here = "pwd | pbcopy";
+
+    cat = "${pkgs.bat}/bin/bat";
 
     k = "${pkgs.kubectl}/bin/kubectl";
     kx = "${pkgs.kubectx}/bin/kubectx";

@@ -11,81 +11,77 @@
       prefix=~/.npm
     '';
 
-    packages = with pkgs; [
-      coreutils
-      neofetch
-      bat
-      colordiff
-      direnv
-      fzf
-      ghorg
-      gnugrep
-      ipcalc
-      pre-commit
-      ripgrep
-      shellcheck
-      tree
-      yq
-      imagemagick
-      curl
-      gnutar
-      gnumake
+    packages = with pkgs;
+      [
+        # admin tools
+        coreutils
+        neofetch
+        bat
+        colordiff
+        gnugrep
+        ripgrep
+        tree
+        yq
+        gnutar
+        gnumake
 
-      glow
+        # etc
+        imagemagick
+        nerdfonts
+        cowsay
+        fortune
+        lolcat
+        gmailctl
+        graphviz
 
-      nerdfonts
+        # git
+        ghorg
+        pre-commit
+        gh
+        glab
 
-      python3
+        # development
+        shellcheck
+        python3
+        nodejs_latest
+        yarn
+        asdf-vm
 
-      cowsay
-      fortune
-      lolcat
+        # networking
+        ipcalc
+        curl
 
-      nixfmt-classic
-      nil # nix lsp
-      devenv
+        #nix
+        nixfmt-classic
+        nil # nix lsp
 
-      # terraform-docs (installed via brew)
-      tflint
-      terragrunt
-      terrascan
+        # devops
+        tflint
+        terragrunt
+        terrascan
 
-      gmailctl
+        # cloud
+        aws-sso-cli
+        awscli
 
-      # cloud
-      aws-sso-cli
-      awscli
+        # k8s
+        kubectl
+        kubernetes-helm
+        kubectx
+        argo
+        argocd
+        eks-node-viewer
 
-      # k8s
-      kubectl
-      kubernetes-helm
-      kubectx
-      argo
-      argocd
-      eks-node-viewer
-
-      # nodejs
-      nodejs_latest
-      yarn
-
-      # gitlab
-      glab
-
-      # podman-desktop
-
-      graphviz
-
-      # https://github.com/charmbracelet
-      glow
-      vhs
-      pop
-      gum
-      skate
-
-      gh
-
-      asdf-vm
-    ];
+        # charmbracelet
+        glow
+        vhs
+        pop
+        gum
+        skate
+      ] ++ (if pkgs.stdenv.isLinux then
+        with pkgs; [ terraform-docs checkov ]
+      else
+        [ ]);
   };
 
   xdg = {
@@ -95,6 +91,7 @@
 
   programs = {
     home-manager.enable = true;
+
     alacritty = import ./alacritty { inherit pkgs; };
     tmux = import ./tmux { inherit pkgs; };
     zsh = import ./zsh { inherit pkgs config; };
@@ -113,7 +110,7 @@
       enable = true;
       config = {
         paging = "never";
-        theme = "ansi";
+        theme = "base16-256";
         style = "plain";
       };
     };
@@ -130,9 +127,22 @@
       icons = true;
       git = true;
     };
+    atuin = {
+      enable = true;
+      flags = [ "--disable-up-arrow" ];
+      # https://docs.atuin.sh/configuration/config/
+      settings = {
+        enter_accept = false;
+        dotfiles.enabled = false;
+      };
+    };
     jq.enable = true;
     htop.enable = true;
-    dircolors.enable = true;
+    dircolors = {
+      enable = true;
+      enableZshIntegration = true;
+    };
     pyenv.enable = true;
+    fd = { enable = true; };
   };
 }

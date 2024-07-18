@@ -60,24 +60,6 @@
       powerOnBoot = true;
     };
     pulseaudio.enable = true;
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-    };
-    nvidia = {
-      modesetting.enable = true;
-      open = true;
-      nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-      prime = {
-        offload = {
-          enable = true;
-          enableOffloadCmd = true;
-        };
-        intelBusId = lib.mkDefault "PCI:0:2:0";
-        nvidiaBusId = lib.mkDefault "PCI:1:0:0";
-      };
-    };
   };
 
   programs.zsh.enable = true;
