@@ -79,7 +79,7 @@
         gum
         skate
       ] ++ (if pkgs.stdenv.isLinux then
-        with pkgs; [ terraform-docs checkov ]
+        with pkgs; [ terraform-docs ]
       else
         [ ]);
   };
