@@ -28,7 +28,13 @@
     };
 
     taps = [ "int128/kubelogin" "homebrew/cask-fonts" ];
-    brews = [ "oidc-kubelogin" "terraform-docs" "doggo" "checkov" ];
+    brews = [ 
+      "cloudsplaining" 
+      "oidc-kubelogin" 
+      "terraform-docs" 
+      "doggo" 
+      "checkov" 
+    ];
     casks = [
       "alacritty"
       "bitwarden"
