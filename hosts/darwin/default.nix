@@ -1,5 +1,6 @@
 { pkgs, ... }: {
-  services.nix-daemon.enable = true;
+  services = { nix-daemon.enable = true; };
+
   nix.settings.experimental-features = "nix-command flakes";
   security.pam.enableSudoTouchIdAuth = true;
 
@@ -9,7 +10,6 @@
 
   nixpkgs.hostPlatform = "aarch64-darwin";
   nixpkgs.config.allowUnfree = true;
-  # nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
 
   nix = {
     gc = {
@@ -28,12 +28,13 @@
     };
 
     taps = [ "int128/kubelogin" "homebrew/cask-fonts" ];
-    brews = [ 
-      "cloudsplaining" 
-      "oidc-kubelogin" 
-      "terraform-docs" 
-      "doggo" 
-      "checkov" 
+    brews = [
+      "cloudsplaining"
+      "oidc-kubelogin"
+      "terraform-docs"
+      "doggo"
+      "checkov"
+      "qemu"
     ];
     casks = [
       "alacritty"
@@ -53,6 +54,8 @@
   };
 
   system = {
+    stateVersion = 4;
+
     defaults = {
       NSGlobalDomain = {
         AppleInterfaceStyle = "Dark";
@@ -67,9 +70,10 @@
         AppleShowAllExtensions = true;
         AppleShowScrollBars = "Always";
 
-        InitialKeyRepeat = 14;
         KeyRepeat = 1;
+        InitialKeyRepeat = 14;
       };
+
       screencapture.location = "${builtins.getEnv "HOME"}/screenshots";
       finder = {
         AppleShowAllExtensions = true;
@@ -96,8 +100,4 @@
       remapCapsLockToEscape = true;
     };
   };
-
-  # Used for backwards compatibility. Please read the changelog
-  # before changing: `darwin-rebuild changelog`.
-  system.stateVersion = 4;
 }
