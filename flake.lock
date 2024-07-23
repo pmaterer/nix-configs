@@ -331,6 +331,24 @@
         "type": "github"
       }
     },
+    "hosts": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1721090606,
+        "narHash": "sha256-tS7CDuotk+aAbtOR1x3u3ymyRvPgb3GZjuDcJNm6lZs=",
+        "owner": "StevenBlack",
+        "repo": "hosts",
+        "rev": "87af2c503dbd86ec8b1f7c70ae005a1dae422a60",
+        "type": "github"
+      },
+      "original": {
+        "owner": "StevenBlack",
+        "repo": "hosts",
+        "type": "github"
+      }
+    },
     "neovim-nightly-overlay": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -338,6 +356,7 @@
         "git-hooks": "git-hooks",
         "hercules-ci-effects": "hercules-ci-effects",
         "neovim-src": "neovim-src",
+        "nixpkgs": "nixpkgs_2"
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
@@ -413,12 +432,10 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1721403608,
-        "narHash": "sha256-X5+QA5K3J2KA20YEaBJ+GKDj/XIb5PutHmphgYQUszA=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "ad0111043c09f7d0f6b9f039882cbf350d4f7d49",
-        "type": "github"
+        "lastModified": 0,
+        "narHash": "sha256-Cypl9ORr5UjtBsbjXMTJRepTe362yNVrPrntUvHiTaw=",
+        "path": "/nix/store/713c3m4kc7jg0pxxvk3v13fgb1fp91h9-source",
+        "type": "path"
       },
       "original": {
         "id": "nixpkgs",
@@ -427,8 +444,8 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1721303309,
-        "narHash": "sha256-/+Yw4tW/mcTRKmkEAO64ObzCQClpSUZpk2flUD9GDHE=",
+        "lastModified": 1720750130,
+        "narHash": "sha256-y2wc7CdK0vVSIbx7MdVoZzuMcUoLvZXm+pQf2RIr1OU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "7e2fb8e0eb807e139d42b05bf8e28da122396bed",
@@ -441,6 +458,7 @@
         "type": "github"
       }
     },
+    "nixpkgs_3": {
     "nixpkgs_3": {
       "locked": {
         "lastModified": 1721403608,
@@ -488,8 +506,10 @@
       "inputs": {
         "home-manager": "home-manager",
         "hosts": "hosts",
+        "hosts": "hosts",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nix-darwin": "nix-darwin",
+        "nixpkgs": "nixpkgs_3",
         "nixpkgs": "nixpkgs_3",
         "nixvim": "nixvim"
       }
