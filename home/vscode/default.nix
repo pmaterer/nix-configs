@@ -27,18 +27,6 @@
         sha256 = "sha256-1kz/M2od2gLSFgqW6LsPHgtm+BwXA+0+7z3HyqNmsOg=";
       }
       {
-        name = "amazon-q-vscode";
-        publisher = "amazonwebservices";
-        version = "1.2.0";
-        sha256 = "sha256-DLPhcq4mISHjuYDSwzISQlU96heBB/123nRZ9DA7CB0=";
-      }
-      {
-        name = "aws-toolkit-vscode";
-        publisher = "amazonwebservices";
-        version = "3.2.0";
-        sha256 = "sha256-p2+/RyszgnyJbai6ddR44cvSTPHQ1HNOmm3ISKReJms=";
-      }
-      {
         name = "vscode-backstage";
         publisher = "intility";
         version = "0.0.4";
@@ -78,7 +66,6 @@
     "[nix]" = { "editor.defaultFormatter" = "jnoortheen.nix-ide"; };
     "editor.fontFamily" = "Monoid Nerd Font";
     "editor.fontSize" = 12;
-    "amazonQ.suppressPrompts" = { "codeWhispererConnectionExpired" = true; };
     "[json]" = { "editor.defaultFormatter" = "vscode.json-language-features"; };
     "[typescript]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
   };
