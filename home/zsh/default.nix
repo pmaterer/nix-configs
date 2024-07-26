@@ -22,6 +22,8 @@
     export PATH=$PATH:~/.npm/bin
 
     export PATH="$HOME/.krew/bin:$PATH"
+
+    eval "$(pyenv virtualenv-init -)"
   '';
 
   shellAliases = {

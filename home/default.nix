@@ -24,6 +24,7 @@
         yq
         gnutar
         gnumake
+        putty
 
         # etc
         imagemagick
@@ -58,6 +59,7 @@
         tflint
         terragrunt
         terrascan
+        packer
 
         # cloud
         aws-sso-cli

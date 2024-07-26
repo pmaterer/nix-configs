@@ -51,10 +51,16 @@
         sha256 = "sha256-r6pPpvJ1AZsM0RYF+xHsZ4b4QTszN+wELr1SENsUDFA=";
       }
       {
-        name = "vscode-wing";
-        publisher = "Monada";
-        version = "0.77.2";
-        sha256 = "sha256-6R59qcoGqAFnAs4erLtQUcuP1dVtaSbxGlY4xeVzTko=";
+        name = "packer";
+        publisher = "4ops";
+        version = "0.3.0";
+        sha256 = "sha256-aYvTxdd+6ESSEDFtb8hwITVjLdbwTV5ZabpwAywGwVc=";
+      }
+      {
+        name = "vscode-packer-powertools";
+        publisher = "sztheory";
+        version = "0.3.0";
+        sha256 = "sha256-onWnEfZmJztjY8ALt85T0gm7JQOp+4IAdnmkHvYm2iY=";
       }
     ];
   userSettings = {
