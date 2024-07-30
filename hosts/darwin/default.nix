@@ -35,6 +35,11 @@
       "doggo"
       "checkov"
       "qemu"
+      {
+        name = "libvirt";
+        restart_service = "changed";
+        start_service = true;
+      }
     ];
     casks = [
       "alacritty"

@@ -1,4 +1,4 @@
-{ pkgs, config, nixvim, ... }: {
+{ pkgs, config, nixvim, defaultEmail, ... }: {
 
   imports = [ nixvim.homeManagerModules.nixvim ];
 
@@ -25,6 +25,8 @@
         gnutar
         gnumake
         putty
+
+        dnsmasq
 
         # etc
         imagemagick
@@ -93,7 +95,7 @@
     alacritty = import ./alacritty { inherit pkgs; };
     tmux = import ./tmux { inherit pkgs; };
     zsh = import ./zsh { inherit pkgs config; };
-    git = import ./git { inherit pkgs; };
+    git = import ./git { inherit pkgs defaultEmail; };
     vscode = import ./vscode { inherit pkgs; };
     nixvim = import ./neovim { inherit pkgs; };
     direnv = {

@@ -20,10 +20,12 @@
     . "${pkgs.asdf-vm}/share/asdf-vm/completions/asdf.bash"
 
     export PATH=$PATH:~/.npm/bin
-
     export PATH="$HOME/.krew/bin:$PATH"
+    export PATH="$HOME/bin:$PATH"
 
     eval "$(pyenv virtualenv-init -)"
+
+    export LIBVIRT_DEFAULT_URI="qemu:///system"
   '';
 
   shellAliases = {
@@ -52,6 +54,9 @@
     tfa = "terraform apply";
     tfaa = "terraform apply -auto-approve";
     tfc = "terraform-docs . && terraform fmt && tflint";
+
+    show-files =
+      "${pkgs.fd}/bin/fd -t f . | xargs -I {} sh -c 'echo \"File: {}\"; cat {}; echo'";
   };
 
   sessionVariables = {

@@ -1,9 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, defaultEmail, ... }: {
   enable = true;
   package = pkgs.gitAndTools.gitFull;
   userName = "Patrick Materer";
-  # userEmail = "patrick.materer@socure.com";
-  userEmail = "patrickmaterer@gmail.com";
+  userEmail = defaultEmail;
   ignores = [ "scratch.txt" ".terraform/" ".DS_Store" ".envrc" ];
   aliases = {
     s = "status";
@@ -16,6 +15,10 @@
 
     log = ''
       !git log --pretty=format:"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]" --abbrev-commit -30'';
+
+    delete-local-merged = ''
+      !git fetch && git branch --merged | xargs git branch -d
+    '';
   };
   extraConfig = {
     core.editor = "vim";

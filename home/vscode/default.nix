@@ -62,6 +62,12 @@
         version = "0.3.0";
         sha256 = "sha256-onWnEfZmJztjY8ALt85T0gm7JQOp+4IAdnmkHvYm2iY=";
       }
+      {
+        name = "nix-env-selector";
+        publisher = "arrterian";
+        version = "1.0.11";
+        sha256 = "sha256-dK0aIH8tkG/9UGblNO0WwxJABBEEKEy4nSmIwdDpf4Q=";
+      }
     ];
   userSettings = {
     "workbench.colorTheme" = "Aura Dark (Soft Text)";

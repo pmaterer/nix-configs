@@ -39,7 +39,10 @@
               useUserPackages = true;
               verbose = true;
               backupFileExtension = "hm-backup";
-              extraSpecialArgs = { inherit nixvim; };
+              extraSpecialArgs = {
+                inherit nixvim;
+                defaultEmail = "patrick.materer@socure.com";
+              };
               users.${username} = import ./home;
             };
           }
@@ -67,7 +70,10 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "hm-backup";
-              extraSpecialArgs = { inherit nixvim; };
+              extraSpecialArgs = {
+                inherit nixvim;
+                defaultEmail = "patrickmaterer@gmail.com";
+              };
               users.${username} = import ./home;
             };
           }
