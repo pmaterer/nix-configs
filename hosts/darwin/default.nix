@@ -15,6 +15,7 @@
     gc = {
       automatic = true;
       interval.Day = 7;
+      options = "--max-free 10G";
     };
 
   };
@@ -27,7 +28,7 @@
       cleanup = "uninstall";
     };
 
-    taps = [ "int128/kubelogin" "homebrew/cask-fonts" ];
+    taps = [ "ggpeti/rmrec" "homebrew/services" "int128/kubelogin" ];
     brews = [
       "cloudsplaining"
       "oidc-kubelogin"
@@ -36,9 +37,9 @@
       "checkov"
       "qemu"
       {
-        name = "libvirt";
-        restart_service = "changed";
-        start_service = true;
+       name = "libvirt";
+       restart_service = "changed";
+       start_service = true;
       }
     ];
     casks = [

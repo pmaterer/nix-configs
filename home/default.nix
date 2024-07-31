@@ -28,6 +28,8 @@
 
         dnsmasq
 
+        ffmpeg
+
         # etc
         imagemagick
         nerdfonts
@@ -81,7 +83,8 @@
         pop
         gum
         skate
-      ] ++ (if pkgs.stdenv.isLinux then with pkgs; [ terraform-docs ] else [ ]);
+
+      ] ++ (if pkgs.stdenv.isLinux then with pkgs; [ terraform-docs qemu libvirt ] else [ ]);
   };
 
   xdg = {

@@ -24,8 +24,6 @@
     export PATH="$HOME/bin:$PATH"
 
     eval "$(pyenv virtualenv-init -)"
-
-    export LIBVIRT_DEFAULT_URI="qemu:///system"
   '';
 
   shellAliases = {

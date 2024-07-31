@@ -6,5 +6,6 @@
             "command": ["nixfmt"]
         }
     },
-    "nix.formatterPath": "nixfmt"
+    "nix.formatterPath": "nixfmt",
+    "nixEnvSelector.nixFile": "${workspaceFolder}/flake.nix"
 }
