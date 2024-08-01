@@ -23,7 +23,7 @@
     export PATH="$HOME/.krew/bin:$PATH"
     export PATH="$HOME/bin:$PATH"
 
-    eval "$(pyenv virtualenv-init -)"
+    [[ -f $PYENV_ROOT/plugins/pyenv-virtualenv ]] && eval "$(pyenv virtualenv-init -)"
   '';
 
   shellAliases = {
@@ -47,6 +47,7 @@
     nixsearch = "nix search nixpkgs";
 
     tf = "terraform";
+    tfi = "terraform init";
     tff = "terraform fmt";
     tfp = "terraform plan";
     tfa = "terraform apply";
