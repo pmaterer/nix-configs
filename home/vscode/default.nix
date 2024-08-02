@@ -15,7 +15,7 @@
       ms-azuretools.vscode-docker
       redhat.vscode-yaml
       ms-vscode.makefile-tools
-
+      catppuccin.catppuccin-vsc-icons
       bradlc.vscode-tailwindcss
       streetsidesoftware.code-spell-checker
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
@@ -70,7 +70,7 @@
       }
     ];
   userSettings = {
-    "workbench.colorTheme" = "Aura Dark (Soft Text)";
+    "workbench.colorTheme" = "Catppuccin Mocha";
     "git.autofetch" = true;
     "git.confirmSync" = false;
     "explorer.confirmDelete" = false;

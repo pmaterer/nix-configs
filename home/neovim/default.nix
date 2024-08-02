@@ -1,6 +1,6 @@
 # https://nix-community.github.io/nixvim/
 
-{ pkgs, ... }: {
+{
   enable = true;
   defaultEditor = true;
   viAlias = true;

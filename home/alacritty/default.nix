@@ -1,8 +1,7 @@
-{ pkgs, ... }: {
+{
   enable = true;
 
   settings = {
-    import = [ "~/.config/alacritty/theme.toml" ];
     window = {
       dimensions = {
         columns = 150;

@@ -7,7 +7,12 @@
   mouse = true;
   shortcut = "C-f";
   historyLimit = 50000;
-  sensibleOnTop = false;
+  sensibleOnTop = true;
+  plugins = with pkgs; [
+    { plugin = tmuxPlugins.yank; }
+    { plugin = tmuxPlugins.weather; }
+  ];
+
   extraConfig = ''
     set -g renumber-windows on
     set -g allow-rename off

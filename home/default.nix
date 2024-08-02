@@ -1,6 +1,8 @@
-{ pkgs, config, nixvim, defaultEmail, ... }: {
+{ pkgs, config, nixvim, catppuccin, defaultEmail, ... }: {
 
   imports = [ nixvim.homeManagerModules.nixvim ];
+
+  catppuccin = { enable = true; };
 
   home = {
     stateVersion = "23.05";
@@ -11,20 +13,19 @@
       prefix=~/.npm
     '';
 
+    # catppuccin.flavor = "mocha";
+
     packages = with pkgs;
       [
         # admin tools
         coreutils
         neofetch
-        bat
         colordiff
-        gnugrep
         ripgrep
         tree
         yq
         gnutar
         gnumake
-        putty
 
         dnsmasq
 
@@ -63,6 +64,8 @@
         tflint
         terragrunt
         terrascan
+
+        # vms
         packer
 
         # cloud
@@ -84,23 +87,26 @@
         gum
         skate
 
-      ] ++ (if pkgs.stdenv.isLinux then with pkgs; [ terraform-docs qemu libvirt ] else [ ]);
+      ] ++ (if pkgs.stdenv.isLinux then
+        with pkgs; [ terraform-docs qemu libvirt vagrant ]
+      else
+        [ ]);
   };
 
   xdg = {
     enable = true;
-    configFile."alacritty/theme.toml".source = ./alacritty/theme.toml;
+    # configFile."alacritty/theme.toml".source = ./alacritty/theme.toml;
   };
 
   programs = {
     home-manager.enable = true;
 
-    alacritty = import ./alacritty { inherit pkgs; };
+    alacritty = import ./alacritty;
     tmux = import ./tmux { inherit pkgs; };
     zsh = import ./zsh { inherit pkgs config; };
     git = import ./git { inherit pkgs defaultEmail; };
     vscode = import ./vscode { inherit pkgs; };
-    nixvim = import ./neovim { inherit pkgs; };
+    nixvim = import ./neovim;
     direnv = {
       enable = true;
       nix-direnv.enable = true;
@@ -114,7 +120,7 @@
       enable = true;
       config = {
         paging = "never";
-        theme = "base16-256";
+        # theme = "base16-256";
         style = "plain";
       };
     };

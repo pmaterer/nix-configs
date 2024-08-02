@@ -18,10 +18,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hosts = { url = "github:StevenBlack/hosts"; };
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = { self, nixpkgs, nix-darwin, home-manager, nixvim
-    , neovim-nightly-overlay, hosts }: {
+    , neovim-nightly-overlay, hosts, catppuccin }: {
 
       # work
       darwinConfigurations.Patricks-MacBook-Pro = let
@@ -39,6 +40,7 @@
               useUserPackages = true;
               verbose = true;
               backupFileExtension = "hm-backup";
+              sharedModules = [ catppuccin.homeManagerModules.catppuccin ];
               extraSpecialArgs = {
                 inherit nixvim;
                 defaultEmail = "patrick.materer@socure.com";

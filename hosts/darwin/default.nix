@@ -36,11 +36,11 @@
       "doggo"
       "checkov"
       "qemu"
-      {
-       name = "libvirt";
-       restart_service = "changed";
-       start_service = true;
-      }
+      # {
+      #   name = "libvirt";
+      #   restart_service = "changed";
+      #   start_service = true;
+      # }
     ];
     casks = [
       "alacritty"
@@ -56,6 +56,7 @@
       "xscreensaver"
       "notion"
       "stats"
+      "vagrant"
     ];
   };
 

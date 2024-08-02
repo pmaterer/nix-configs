@@ -35,6 +35,7 @@
 
     cat = "${pkgs.bat}/bin/bat";
 
+    # kubernetes
     k = "${pkgs.kubectl}/bin/kubectl";
     kx = "${pkgs.kubectx}/bin/kubectx";
     kn = "${pkgs.kubectx}/bin/kubens";
@@ -46,6 +47,7 @@
 
     nixsearch = "nix search nixpkgs";
 
+    # terraform
     tf = "terraform";
     tfi = "terraform init";
     tff = "terraform fmt";
