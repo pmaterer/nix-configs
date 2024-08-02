@@ -72,6 +72,7 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "hm-backup";
+              sharedModules = [ catppuccin.homeManagerModules.catppuccin ];
               extraSpecialArgs = {
                 inherit nixvim;
                 defaultEmail = "patrickmaterer@gmail.com";
