@@ -88,7 +88,7 @@
         skate
 
       ] ++ (if pkgs.stdenv.isLinux then
-        with pkgs; [ terraform-docs qemu libvirt vagrant ]
+        with pkgs; [ terraform-docs qemu OVMF libvirt vagrant ]
       else
         [ ]);
   };

@@ -24,7 +24,9 @@
     export PATH="$HOME/bin:$PATH"
 
     [[ -f $PYENV_ROOT/plugins/pyenv-virtualenv ]] && eval "$(pyenv virtualenv-init -)"
-  '';
+  '' + (if pkgs.stdenv.isLinux then ''
+    export OVMF_PATH="${pkgs.OVMF.fd}/FV"
+  '' else '''');
 
   shellAliases = {
     switch = "darwin-rebuild switch --flake ~/.config/nix";
