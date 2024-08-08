@@ -80,5 +80,6 @@
     "editor.fontSize" = 12;
     "[json]" = { "editor.defaultFormatter" = "vscode.json-language-features"; };
     "[typescript]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
+    "terminal.integrated.sendKeybindingsToShell" = true;
   };
 }

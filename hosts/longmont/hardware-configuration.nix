@@ -3,6 +3,8 @@
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
+  # https://thinkstation-specs.com/thinkpad/p1-gen-1/
+
   boot = {
     initrd.availableKernelModules =
       [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
@@ -16,22 +18,23 @@
   };
 
   hardware = {
+    # Quadro P1000 Mobile
+    # https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/productspage/quadro/quadro-desktop/quadro-pascal-p1000-data-sheet-us-nv-704475-r1.pdf
     graphics = {
-      enable = lib.mkDefault true;
-      enable32Bit = lib.mkDefault true;
+      enable = true;
+      enable32Bit = true;
     };
     nvidia = {
-      modesetting.enable = lib.mkDefault true;
-      open = true;
+      modesetting.enable = true;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      package = config.boot.kernelPackages.nvidiaPackages.production;
       prime = {
         offload = {
           enable = true;
           enableOffloadCmd = true;
         };
-        intelBusId = lib.mkDefault "PCI:0:2:0";
-        nvidiaBusId = lib.mkDefault "PCI:1:0:0";
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
       };
     };
   };

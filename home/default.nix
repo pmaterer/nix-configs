@@ -26,6 +26,7 @@
         yq
         gnutar
         gnumake
+        unzip
 
         dnsmasq
 
@@ -88,15 +89,25 @@
         skate
 
       ] ++ (if pkgs.stdenv.isLinux then
-        with pkgs; [ terraform-docs qemu OVMF libvirt vagrant ]
+        with pkgs; [
+
+          terraform-docs
+          vagrant
+          iw
+          qemu
+          OVMF
+          libvirt
+          virt-viewer
+          virt-manager
+          pciutils
+          glxinfo
+          lshw
+        ]
       else
         [ ]);
   };
 
-  xdg = {
-    enable = true;
-    # configFile."alacritty/theme.toml".source = ./alacritty/theme.toml;
-  };
+  xdg = { enable = true; };
 
   programs = {
     home-manager.enable = true;

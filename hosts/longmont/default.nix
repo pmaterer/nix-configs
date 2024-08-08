@@ -1,6 +1,6 @@
 { pkgs, config, lib, ... }: {
 
-  imports = [ ./hardware-configuration.nix ];
+  imports = [ ./hardware-configuration.nix ./libvirt.nix ];
 
   boot = {
     loader = {
@@ -23,9 +23,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   services = {
-    displayManager = {
-      defaultSession = "none+i3"; # or "none+i3"
-    };
+    displayManager = { defaultSession = "plasma"; };
     xserver = {
       enable = true;
       xkb = {
@@ -35,17 +33,8 @@
 
       displayManager = { lightdm.enable = true; };
 
-      desktopManager = {
-        xfce.enable = true;
-        lumina.enable = true;
-        pantheon.enable = true;
-        plasma5.enable = true;
-      };
+      desktopManager = { plasma5.enable = true; };
 
-      windowManager.i3 = {
-        enable = true;
-        extraPackages = with pkgs; [ dmenu i3status i3lock ];
-      };
       videoDrivers = [ "nvidia" ];
     };
     libinput.enable = true;
@@ -66,7 +55,7 @@
 
   users.users.patrick = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
     packages = with pkgs; [ firefox bitwarden-desktop ];
     shell = pkgs.zsh;
   };
