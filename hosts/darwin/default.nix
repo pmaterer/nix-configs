@@ -57,6 +57,7 @@
       "notion"
       "stats"
       "vagrant"
+      "gimp"
     ];
   };
 

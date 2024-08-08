@@ -1,4 +1,6 @@
-# Nix Configs
+# ❄️ Nix Configs ❄️
+
+![a warning](./docs/images/warning.png)
 
 ## Docs
 
