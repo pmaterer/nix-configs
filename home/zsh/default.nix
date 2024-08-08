@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{ pkgs, config, ... }: {
   enable = true;
 
   enableCompletion = true;
@@ -63,7 +59,8 @@
     tfaa = "terraform apply -auto-approve";
     tfc = "terraform-docs . && terraform fmt && tflint";
 
-    show-files = "${pkgs.fd}/bin/fd -t f . | xargs -I {} sh -c 'echo \"File: {}\"; cat {}; echo'";
+    show-files =
+      "${pkgs.fd}/bin/fd -t f . | xargs -I {} sh -c 'echo \"File: {}\"; cat {}; echo'";
 
     spt = "spotify_player";
   };

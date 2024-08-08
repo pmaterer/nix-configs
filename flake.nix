@@ -1,5 +1,6 @@
 {
-  description = "This place is not a place of honor... no highly esteemed deed is commemorated here... nothing valued is here.";
+  description =
+    "This place is not a place of honor... no highly esteemed deed is commemorated here... nothing valued is here.";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -16,7 +17,7 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hosts = {url = "github:StevenBlack/hosts";};
+    hosts = { url = "github:StevenBlack/hosts"; };
     catppuccin.url = "github:catppuccin/nix";
     agenix = {
       url = "github:ryantm/agenix";
@@ -24,24 +25,14 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    nix-darwin,
-    home-manager,
-    nixvim,
-    neovim-nightly-overlay,
-    hosts,
-    catppuccin,
-    agenix,
-  }: {
-    # work
-    darwinConfigurations.Patricks-MacBook-Pro-2 = let
-      username = "pmaterer";
-      system = "aarch64-darwin";
-      overlays = [neovim-nightly-overlay.overlays.default];
-    in
-      nix-darwin.lib.darwinSystem {
+  outputs = { self, nixpkgs, nix-darwin, home-manager, nixvim
+    , neovim-nightly-overlay, hosts, catppuccin, agenix, }: {
+      # work
+      darwinConfigurations.Patricks-MacBook-Pro-2 = let
+        username = "pmaterer";
+        system = "aarch64-darwin";
+        overlays = [ neovim-nightly-overlay.overlays.default ];
+      in nix-darwin.lib.darwinSystem {
         inherit system;
         modules = [
           ./hosts/darwin
@@ -69,16 +60,15 @@
               shell = nixpkgs.zsh;
             };
           }
-          {nixpkgs.overlays = overlays;}
+          { nixpkgs.overlays = overlays; }
         ];
       };
 
-    nixosConfigurations.longmont = let
-      username = "patrick";
-      system = "x86_64-linux";
-      overlays = [neovim-nightly-overlay.overlays.default];
-    in
-      nixpkgs.lib.nixosSystem {
+      nixosConfigurations.longmont = let
+        username = "patrick";
+        system = "x86_64-linux";
+        overlays = [ neovim-nightly-overlay.overlays.default ];
+      in nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
           ./hosts/longmont
@@ -88,18 +78,21 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "hm-backup";
-              sharedModules = [catppuccin.homeManagerModules.catppuccin];
+              sharedModules = [ 
+                catppuccin.homeManagerModules.catppuccin
+                agenix.homeManagerModules.age # add age config
+               ];
               extraSpecialArgs = {
-                inherit nixvim;
+                inherit nixvim agenix system;
                 defaultEmail = "patrickmaterer@gmail.com";
               };
               users.${username} = import ./home;
             };
           }
-          {nixpkgs.overlays = overlays;}
+          { nixpkgs.overlays = overlays; }
           hosts.nixosModule
-          {networking.stevenBlackHosts.enable = true;}
+          { networking.stevenBlackHosts.enable = true; }
         ];
       };
-  };
+    };
 }

@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   enable = true;
   aggressiveResize = true;
   baseIndex = 1;
@@ -9,8 +9,8 @@
   historyLimit = 50000;
   sensibleOnTop = true;
   plugins = with pkgs; [
-    {plugin = tmuxPlugins.yank;}
-    {plugin = tmuxPlugins.weather;}
+    { plugin = tmuxPlugins.yank; }
+    { plugin = tmuxPlugins.weather; }
   ];
 
   extraConfig = ''

@@ -1,10 +1,10 @@
-{pkgs, ...}: {
-  services = {nix-daemon.enable = true;};
+{ pkgs, ... }: {
+  services = { nix-daemon.enable = true; };
 
   nix.settings.experimental-features = "nix-command flakes";
   security.pam.enableSudoTouchIdAuth = true;
 
-  environment.shells = with pkgs; [bash zsh];
+  environment.shells = with pkgs; [ bash zsh ];
   # Creates /etc/zshrc that load the nix-darwin environment
   programs.zsh.enable = true;
 
@@ -27,7 +27,7 @@
       cleanup = "uninstall";
     };
 
-    taps = ["ggpeti/rmrec" "homebrew/services" "int128/kubelogin"];
+    taps = [ "ggpeti/rmrec" "homebrew/services" "int128/kubelogin" ];
     brews = [
       "cloudsplaining"
       "oidc-kubelogin"
