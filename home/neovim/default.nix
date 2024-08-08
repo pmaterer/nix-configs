@@ -1,5 +1,4 @@
 # https://nix-community.github.io/nixvim/
-
 {
   enable = true;
   defaultEditor = true;
@@ -47,7 +46,6 @@
     shiftround = true;
     shiftwidth = tabSize;
     signcolumn = "yes";
-
   };
 
   keymaps = let

@@ -1,10 +1,10 @@
-{ pkgs, ... }: {
-  services = { nix-daemon.enable = true; };
+{pkgs, ...}: {
+  services = {nix-daemon.enable = true;};
 
   nix.settings.experimental-features = "nix-command flakes";
   security.pam.enableSudoTouchIdAuth = true;
 
-  environment.shells = with pkgs; [ bash zsh ];
+  environment.shells = with pkgs; [bash zsh];
   # Creates /etc/zshrc that load the nix-darwin environment
   programs.zsh.enable = true;
 
@@ -17,7 +17,6 @@
       interval.Day = 7;
       options = "--max-free 10G";
     };
-
   };
 
   homebrew = {
@@ -28,7 +27,7 @@
       cleanup = "uninstall";
     };
 
-    taps = [ "ggpeti/rmrec" "homebrew/services" "int128/kubelogin" ];
+    taps = ["ggpeti/rmrec" "homebrew/services" "int128/kubelogin"];
     brews = [
       "cloudsplaining"
       "oidc-kubelogin"
@@ -41,6 +40,7 @@
       #   restart_service = "changed";
       #   start_service = true;
       # }
+      "spotify_player"
     ];
     casks = [
       "alacritty"
@@ -64,6 +64,19 @@
     stateVersion = 4;
 
     defaults = {
+      dock = {
+        autohide = true;
+        orientation = "right";
+        showhidden = true;
+        mineffect = "genie";
+        launchanim = true;
+        show-process-indicators = true;
+        tilesize = 48;
+        static-only = true;
+        mru-spaces = false;
+        show-recents = false;
+      };
+
       NSGlobalDomain = {
         AppleInterfaceStyle = "Dark";
         _HIHideMenuBar = true;
@@ -88,19 +101,6 @@
         _FXShowPosixPathInTitle = true;
         FXEnableExtensionChangeWarning = false;
       };
-      dock = {
-        autohide = true;
-        orientation = "bottom";
-        showhidden = true;
-        mineffect = "genie";
-        launchanim = true;
-        show-process-indicators = true;
-        tilesize = 48;
-        static-only = true;
-        mru-spaces = false;
-        show-recents = false;
-      };
-
     };
     keyboard = {
       enableKeyMapping = true;

@@ -1,12 +1,13 @@
 # Nix Configs
 
-
 ## Docs
 
 * [Home configuration](./docs/home.md)
 * [Darwin configuration](./docs/darwin.md)
 
 ## Links
+
+* [MyNixOS](https://mynixos.com/)
 
 ### Blogs
 

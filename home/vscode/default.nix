@@ -1,5 +1,5 @@
 # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.vscode.enable
-{ pkgs, ... }: {
+{pkgs, ...}: {
   enable = true;
   extensions = with pkgs.vscode-extensions;
     [
@@ -18,7 +18,8 @@
       catppuccin.catppuccin-vsc-icons
       bradlc.vscode-tailwindcss
       streetsidesoftware.code-spell-checker
-    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    ]
+    ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       # use pkgs.lib.fakeSha256 to get sha256
       {
         name = "vscode-openapi";
@@ -75,8 +76,8 @@
     "git.confirmSync" = false;
     "explorer.confirmDelete" = false;
     "nixfmt.path" = "${pkgs.nixfmt-classic}/bin/nixfmt";
-    "[nix]" = { "editor.defaultFormatter" = "jnoortheen.nix-ide"; };
-    "editor.fontFamily" = "Monoid Nerd Font";
+    "[nix]" = {"editor.defaultFormatter" = "jnoortheen.nix-ide";};
+    "editor.fontFamily" = "Iosevka Nerd Font Mono";
     "editor.fontSize" = 12;
     "[json]" = { "editor.defaultFormatter" = "vscode.json-language-features"; };
     "[typescript]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };

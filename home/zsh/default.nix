@@ -1,4 +1,8 @@
-{ pkgs, config, ... }: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   enable = true;
 
   enableCompletion = true;
@@ -12,7 +16,7 @@
   history.path = "${config.xdg.dataHome}/zsh/history";
 
   initExtra = ''
-    [[ -f $HOME/.secrets.zsh ]] && source $HOME/.secrets.zsh
+    source ${config.age.secrets.environment.path}
 
     source <(kubectl completion zsh)
 
@@ -59,8 +63,9 @@
     tfaa = "terraform apply -auto-approve";
     tfc = "terraform-docs . && terraform fmt && tflint";
 
-    show-files =
-      "${pkgs.fd}/bin/fd -t f . | xargs -I {} sh -c 'echo \"File: {}\"; cat {}; echo'";
+    show-files = "${pkgs.fd}/bin/fd -t f . | xargs -I {} sh -c 'echo \"File: {}\"; cat {}; echo'";
+
+    spt = "spotify_player";
   };
 
   sessionVariables = {
@@ -69,8 +74,8 @@
     HOMEBREW_NO_ANALYTICS = 1;
 
     AWS_PAGER = "";
-    AWS_CA_BUNDLE = "/Users/pmaterer/FW_BUNDLE.crt";
-    NODE_EXTRA_CA_CERTS = "/Users/pmaterer/FW_BUNDLE.crt";
+    AWS_CA_BUNDLE = config.age.secrets.certs.path;
+    NODE_EXTRA_CA_CERTS = config.age.secrets.certs.path;
     AWS_DEFAULT_REGION = "us-east-1";
   };
 }

@@ -11,7 +11,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   networking = {
     hostName = "longmont";
@@ -31,7 +31,7 @@
         options = "caps:escape";
       };
 
-      displayManager = { lightdm.enable = true; };
+      displayManager = {lightdm.enable = true;};
 
       desktopManager = { plasma5.enable = true; };
 
