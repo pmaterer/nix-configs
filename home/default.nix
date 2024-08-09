@@ -113,6 +113,8 @@
           pciutils
           glxinfo
           lshw
+
+          libxslt
         ]
       else
         [ ]);
