@@ -24,6 +24,7 @@
 
   services = {
     displayManager = { defaultSession = "plasma"; };
+
     xserver = {
       enable = true;
       xkb = {

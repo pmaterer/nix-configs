@@ -103,6 +103,7 @@
         with pkgs; [
           terraform-docs
           vagrant
+          spotify-player
           iw
           qemu
           OVMF

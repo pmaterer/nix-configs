@@ -26,7 +26,7 @@
   };
 
   outputs = { self, nixpkgs, nix-darwin, home-manager, nixvim
-    , neovim-nightly-overlay, hosts, catppuccin, agenix, }: {
+    , neovim-nightly-overlay, hosts, catppuccin, agenix }: {
       # work
       darwinConfigurations.Patricks-MacBook-Pro-2 = let
         username = "pmaterer";
@@ -78,10 +78,10 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               backupFileExtension = "hm-backup";
-              sharedModules = [ 
+              sharedModules = [
                 catppuccin.homeManagerModules.catppuccin
                 agenix.homeManagerModules.age # add age config
-               ];
+              ];
               extraSpecialArgs = {
                 inherit nixvim agenix system;
                 defaultEmail = "patrickmaterer@gmail.com";
