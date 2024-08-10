@@ -24,10 +24,14 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    cosmic = {
+      url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, nix-darwin, home-manager, nixvim
-    , neovim-nightly-overlay, hosts, catppuccin, agenix }: {
+    , neovim-nightly-overlay, hosts, catppuccin, agenix, cosmic }: {
       # work
       darwinConfigurations.Patricks-MacBook-Pro-2 = let
         username = "pmaterer";
@@ -93,6 +97,15 @@
           { nixpkgs.overlays = overlays; }
           hosts.nixosModule
           { networking.stevenBlackHosts.enable = true; }
+          {
+            nix.settings = {
+              substituters = [ "https://cosmic.cachix.org/" ];
+              trusted-public-keys = [
+                "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
+              ];
+            };
+          }
+          cosmic.nixosModules.default
         ];
       };
     };

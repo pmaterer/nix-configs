@@ -128,6 +128,9 @@
     configFile."spotify-player/app.toml".text = ''
       client_id = "3294e1e273f442519e5abf3b7bafed99"
     '';
+
+    configFile."alacritty/theme.toml".source =
+      ./alacritty/themes/gruvbox_material_hard_dark.toml;
   };
 
   programs = {
