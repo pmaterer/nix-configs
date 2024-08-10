@@ -22,10 +22,6 @@ fmt:
 lint:
 	@nix run nixpkgs#statix check .
 
-.PHONY: alejandra
-alejandra:
-	@nix run github:kamadorueda/alejandra/3.0.0 .
-
 .PHONY: check
 check:
 	@nix run "github:DeterminateSystems/flake-checker"
@@ -35,3 +31,7 @@ validate:
 	@make fmt
 	@make lint
 	@make check
+
+.PHONY: alejandra
+alejandra:
+	@nix run github:kamadorueda/alejandra/3.0.0 .

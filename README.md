@@ -2,6 +2,16 @@
 
 ![a warning](./docs/images/warning.png)
 
+## Usage
+
+To run:
+
+```sh
+make switch
+```
+
+The `Makefile` has logic to know if it is running on macOS or NixOS and targets `$(hostname -s)`.
+
 ## Docs
 
 * [Home configuration](./docs/home.md)
