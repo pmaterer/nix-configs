@@ -49,6 +49,7 @@
         lolcat
         gmailctl
         graphviz
+        element
 
         # fonts
         monaspace
@@ -114,7 +115,9 @@
           glxinfo
           lshw
 
-          libxslt
+          libxslt # for libvirt Terraform
+
+          element-desktop
         ]
       else
         [ ]);
