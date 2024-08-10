@@ -18,9 +18,9 @@
   hardware = {
     # Quadro P1000 Mobile
     # https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/productspage/quadro/quadro-desktop/quadro-pascal-p1000-data-sheet-us-nv-704475-r1.pdf
-    graphics = {
+    opengl = {
       enable = true;
-      enable32Bit = true;
+      # enable32Bit = true;
     };
     nvidia = {
       modesetting.enable = true;
