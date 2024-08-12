@@ -18,6 +18,7 @@
       catppuccin.catppuccin-vsc-icons
       bradlc.vscode-tailwindcss
       streetsidesoftware.code-spell-checker
+      jdinhlife.gruvbox
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       # use pkgs.lib.fakeSha256 to get sha256
       {
@@ -70,13 +71,13 @@
       }
     ];
   userSettings = {
-    "workbench.colorTheme" = "Catppuccin Mocha";
+    "workbench.colorTheme" = "Gruvbox Dark Hard";
     "git.autofetch" = true;
     "git.confirmSync" = false;
     "explorer.confirmDelete" = false;
     "nixfmt.path" = "${pkgs.nixfmt-classic}/bin/nixfmt";
     "[nix]" = { "editor.defaultFormatter" = "jnoortheen.nix-ide"; };
-    "editor.fontFamily" = "Iosevka Nerd Font Mono";
+    "editor.fontFamily" = "FantasqueSansM Nerd Font Mono";
     "editor.fontSize" = 12;
     "[json]" = { "editor.defaultFormatter" = "vscode.json-language-features"; };
     "[typescript]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };

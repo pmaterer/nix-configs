@@ -215,11 +215,17 @@
     }
   ];
 
+  colorschemes = { gruvbox = { enable = true; }; };
+
   plugins = {
     nvim-tree = {
       enable = true;
       openOnSetupFile = true;
       autoReloadOnWrite = true;
     };
+    treesitter.enable = true;
+    conform-nvim.enable = true;
+    neogit.enable = true;
+    fzf-lua.enable = true;
   };
 }

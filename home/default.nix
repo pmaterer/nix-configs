@@ -2,7 +2,7 @@
   imports = [ nixvim.homeManagerModules.nixvim ];
 
   catppuccin = {
-    enable = true;
+    enable = false;
     flavor = "mocha";
   };
 
@@ -53,6 +53,7 @@
 
         # fonts
         monaspace
+        fantasque-sans-mono
 
         # git
         ghorg
@@ -117,7 +118,7 @@
 
           libxslt # for libvirt Terraform
 
-          element-desktop
+          xclip
         ]
       else
         [ ]);
@@ -125,12 +126,20 @@
   xdg = {
     enable = true;
 
-    configFile."spotify-player/app.toml".text = ''
-      client_id = "3294e1e273f442519e5abf3b7bafed99"
-    '';
+    configFile = {
+      "spotify-player/app.toml".text = ''
+        client_id = "3294e1e273f442519e5abf3b7bafed99"
+      '';
 
-    configFile."alacritty/theme.toml".source =
-      ./alacritty/themes/gruvbox_material_hard_dark.toml;
+      "alacritty/theme.toml".source =
+        ./alacritty/themes/gruvbox_material_hard_dark.toml;
+
+      "libvirt/qemu.conf" = pkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
+        text = ''
+          nvram = [ "/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd"]
+        '';
+      };
+    };
   };
 
   programs = {
