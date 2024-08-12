@@ -13,6 +13,8 @@
       unzip
 
       dnsmasq
+
+      step-cli
       step-ca
 
       ffmpeg
