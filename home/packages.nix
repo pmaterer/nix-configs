@@ -29,7 +29,6 @@
       lolcat
       gmailctl
       graphviz
-      element
 
       # fonts
       monaspace

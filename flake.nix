@@ -19,7 +19,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hosts = { url = "github:StevenBlack/hosts"; };
-    catppuccin.url = "github:catppuccin/nix";
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,7 +30,7 @@
   };
 
   outputs = { self, nixpkgs, nix-darwin, home-manager, nixvim
-    , neovim-nightly-overlay, hosts, catppuccin, agenix, cosmic }: {
+    , neovim-nightly-overlay, hosts, agenix, cosmic }: {
       # work
       darwinConfigurations.Patricks-MacBook-Pro-2 = let
         username = "pmaterer";
@@ -49,7 +48,6 @@
               verbose = true;
               backupFileExtension = "hm-backup";
               sharedModules = [
-                catppuccin.homeManagerModules.catppuccin
                 agenix.homeManagerModules.age # add age config
               ];
               extraSpecialArgs = {
@@ -84,7 +82,6 @@
               useUserPackages = true;
               backupFileExtension = "hm-backup";
               sharedModules = [
-                catppuccin.homeManagerModules.catppuccin
                 agenix.homeManagerModules.age # add age config
               ];
               extraSpecialArgs = {

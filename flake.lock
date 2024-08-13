@@ -23,21 +23,6 @@
         "type": "github"
       }
     },
-    "catppuccin": {
-      "locked": {
-        "lastModified": 1722997334,
-        "narHash": "sha256-vE5FcKVQ3E0txJKt5w3vOlfcN1XoTAlxK9PnQ/CJavA=",
-        "owner": "catppuccin",
-        "repo": "nix",
-        "rev": "66f4ea170093b62f319f41cebd2337a51b225c5a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "catppuccin",
-        "repo": "nix",
-        "type": "github"
-      }
-    },
     "cosmic": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -618,7 +603,6 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
-        "catppuccin": "catppuccin",
         "cosmic": "cosmic",
         "home-manager": "home-manager_2",
         "hosts": "hosts",

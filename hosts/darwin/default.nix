@@ -58,6 +58,7 @@
       "stats"
       "vagrant"
       "gimp"
+      "wezterm"
     ];
   };
 

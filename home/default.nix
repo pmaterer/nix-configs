@@ -1,10 +1,5 @@
-{ pkgs, config, nixvim, agenix, defaultEmail, ... }: {
+{ pkgs, config, nixvim, defaultEmail, ... }: {
   imports = [ ./packages.nix nixvim.homeManagerModules.nixvim ];
-
-  catppuccin = {
-    enable = false;
-    flavor = "mocha";
-  };
 
   # secrets
   age = {
@@ -33,12 +28,10 @@
 
       "alacritty/theme.toml".source =
         ./alacritty/themes/gruvbox_material_hard_dark.toml;
-
-      "libvirt/qemu.conf" = pkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
-        text = ''
-          nvram = [ "/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd"]
-        '';
-      };
+    } // pkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
+      "libvirt/qemu.conf".text = ''
+        nvram = [ "/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd"]
+      '';
     };
   };
 
@@ -97,5 +90,9 @@
     };
     pyenv.enable = true;
     fd = { enable = true; };
+
+    # wezterm = {
+    #   enable = true;
+    # };
   };
 }
