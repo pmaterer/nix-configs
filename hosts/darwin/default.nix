@@ -59,6 +59,7 @@
       "vagrant"
       "gimp"
       "wezterm"
+      "db-browser-for-sqlite"
     ];
   };
 

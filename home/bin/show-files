@@ -4,7 +4,12 @@ import fnmatch
 
 def load_gitignore_patterns(directory):
     gitignore_path = os.path.join(directory, '.gitignore')
-    patterns = []
+    # Some common things we can safely ignore
+    patterns = [
+        '.git', '.gitignore',
+        '*.lock', 
+        '.vscode'
+    ] 
     if os.path.exists(gitignore_path):
         with open(gitignore_path, 'r') as gitignore_file:
             for line in gitignore_file:
