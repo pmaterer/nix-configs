@@ -73,6 +73,7 @@
       argo
       argocd
       eks-node-viewer
+      kubie
 
       # charmbracelet
       glow

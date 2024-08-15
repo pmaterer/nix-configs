@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+import os
+import fnmatch
+
+def load_gitignore_patterns(directory):
+    gitignore_path = os.path.join(directory, '.gitignore')
+    patterns = []
+    if os.path.exists(gitignore_path):
+        with open(gitignore_path, 'r') as gitignore_file:
+            for line in gitignore_file:
+                line = line.strip()
+                if line and not line.startswith('#'):
+                    patterns.append(line)
+    return patterns
+
+def should_ignore(path, patterns):
+    for pattern in patterns:
+        if fnmatch.fnmatch(path, pattern) or fnmatch.fnmatch(os.path.basename(path), pattern):
+            return True
+    return False
+
+def walk_directory(directory, patterns):
+    for root, dirs, files in os.walk(directory):
+        dirs[:] = [d for d in dirs if not should_ignore(os.path.join(root, d), patterns)]
+        for file in files:
+            file_path = os.path.join(root, file)
+            if not should_ignore(file_path, patterns):
+                print(f"File: {file}\nPath: {file_path}\n")
+                print("Contents:")
+                try:
+                    with open(file_path, 'r') as f:
+                        contents = f.read()
+                        print(contents)
+                except Exception as e:
+                    print(f"Error reading file: {e}")
+                print("\n" + "-"*40 + "\n")
+
+def main():
+    directory = '.'
+    gitignore_patterns = load_gitignore_patterns(directory)
+    walk_directory(directory, gitignore_patterns)
+
+if __name__ == "__main__":
+    main()

@@ -16,6 +16,11 @@
     file.".npmrc".text = ''
       prefix=~/.npm
     '';
+
+    file."bin" = {
+      source = ./bin;
+      target = "${config.home.homeDirectory}/bin";
+    };
   };
 
   xdg = {
