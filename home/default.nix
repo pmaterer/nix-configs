@@ -33,6 +33,7 @@
 
       "alacritty/theme.toml".source =
         ./alacritty/themes/gruvbox_material_hard_dark.toml;
+      "alacritty/themes".source = ./alacritty/themes;
     } // pkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
       "libvirt/qemu.conf".text = ''
         nvram = [ "/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd"]

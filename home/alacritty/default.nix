@@ -2,7 +2,7 @@
   enable = true;
 
   settings = {
-    import = [ "~/.config/alacritty/theme.toml" ];
+    import = [ "~/.config/alacritty/themes/base16-pop-256.toml" ];
     window = {
       dimensions = {
         columns = 150;

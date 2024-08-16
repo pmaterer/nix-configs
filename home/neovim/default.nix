@@ -6,8 +6,7 @@
   vimAlias = true;
   # package = pkgs.neovim-nightly;
 
-  globals.mapleader = ",";
-  clipboard.register = "unnamedplus";
+  globals.mapleader = ","; clipboard.register = "unnamedplus";
   opts = let
     tabSize = 2;
     encodingStandard = "utf-8";
@@ -215,7 +214,13 @@
     }
   ];
 
-  colorschemes = { gruvbox = { enable = true; }; };
+  colorschemes = { 
+    base16 = {
+      enable = true;
+      colorscheme = "dracula";
+    };
+  };
+
 
   plugins = {
     nvim-tree = {
