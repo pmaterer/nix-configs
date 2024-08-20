@@ -81,6 +81,9 @@
       pop
       gum
       skate
+
+      # ai
+      llama-cpp
     ] ++ (if pkgs.stdenv.isLinux then
       with pkgs; [
         terraform-docs

@@ -94,7 +94,7 @@
       enable = true;
       enableZshIntegration = true;
     };
-    pyenv.enable = true;
+    #pyenv.enable = true;
     fd = { enable = true; };
 
     # wezterm = {

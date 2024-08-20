@@ -23,7 +23,11 @@
     export PATH="$HOME/.krew/bin:$PATH"
     export PATH="$HOME/bin:$PATH"
 
+    export PYENV_ROOT="$HOME/.pyenv"
+    [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
     [[ -f $PYENV_ROOT/plugins/pyenv-virtualenv ]] && eval "$(pyenv virtualenv-init -)"
+
   '' + (if pkgs.stdenv.isLinux then ''
     export OVMF_PATH="${pkgs.OVMF.fd}/FV"
   '' else
@@ -53,6 +57,7 @@
     # terraform
     tf = "terraform";
     tfi = "terraform init";
+    tfiu = "terraform init -upgrade";
     tff = "terraform fmt";
     tfp = "terraform plan";
     tfa = "terraform apply";

@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   services = { nix-daemon.enable = true; };
 
-  nix.settings.experimental-features = "nix-command flakes";
   security.pam.enableSudoTouchIdAuth = true;
 
   environment.shells = with pkgs; [ bash zsh ];
@@ -12,6 +11,10 @@
   nixpkgs.config.allowUnfree = true;
 
   nix = {
+    settings = {
+      experimental-features = "nix-command flakes";
+      trusted-users = [ "root" "pmaterer" ];
+    };
     gc = {
       automatic = true;
       interval.Day = 7;
@@ -35,12 +38,8 @@
       "doggo"
       "checkov"
       "qemu"
-      # {
-      #   name = "libvirt";
-      #   restart_service = "changed";
-      #   start_service = true;
-      # }
       "spotify_player"
+      "opa"
     ];
     casks = [
       "alacritty"
