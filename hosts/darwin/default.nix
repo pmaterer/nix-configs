@@ -40,6 +40,7 @@
       "qemu"
       "spotify_player"
       "opa"
+      "terragrunt"
     ];
     casks = [
       "alacritty"

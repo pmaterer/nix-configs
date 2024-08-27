@@ -44,8 +44,10 @@
 
     # kubernetes
     k = "${pkgs.kubectl}/bin/kubectl";
-    kx = "${pkgs.kubectx}/bin/kubectx";
-    kn = "${pkgs.kubectx}/bin/kubens";
+
+    kx = "${pkgs.kubie}/bin/kubie ctx";
+    kn = "${pkgs.kubie}/bin/kubie ns";
+
     netshoot = "k run tmp-shell --rm -i --tty --image nicolaka/netshoot";
     kill-pod = "k delete pod --force --grace-period=0";
 

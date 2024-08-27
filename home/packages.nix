@@ -56,7 +56,7 @@
 
       # devops
       tflint
-      terragrunt
+      #terragrunt
       terrascan
 
       # vms
