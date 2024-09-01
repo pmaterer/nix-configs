@@ -21,6 +21,10 @@
     delete-local-merged = ''
       !git fetch && git branch --merged | xargs git branch -d
     '';
+
+    nuke = ''
+      !git branch -D $1 && git push origin :$1
+    '';
   };
   extraConfig = {
     core.editor = "vim";

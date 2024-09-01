@@ -1,39 +1,39 @@
 let
-    tabSize = 2;
-    encodingStandard = "utf-8";
-  in {
-    cmdheight = 2;
+  tabSize = 2;
+  encodingStandard = "utf-8";
+in {
+  cmdheight = 2;
 
-    encoding = encodingStandard;
-    fileencoding = encodingStandard;
+  encoding = encodingStandard;
+  fileencoding = encodingStandard;
 
-    filetype = "on";
-    syntax = "on";
+  filetype = "on";
+  syntax = "on";
 
-    smartcase = true;
-    ignorecase = true;
-    smartindent = true;
+  smartcase = true;
+  ignorecase = true;
+  smartindent = true;
 
-    softtabstop = tabSize;
-    tabstop = tabSize;
+  softtabstop = tabSize;
+  tabstop = tabSize;
 
-    termguicolors = true;
-    wrap = true;
+  termguicolors = true;
+  wrap = true;
 
-    splitbelow = true;
-    splitright = true;
+  splitbelow = true;
+  splitright = true;
 
-    swapfile = false;
+  swapfile = false;
 
-    pumheight = 10;
-    ruler = true;
+  pumheight = 10;
+  ruler = true;
 
-    expandtab = true;
+  expandtab = true;
 
-    number = true;
-    relativenumber = true;
+  number = true;
+  relativenumber = true;
 
-    shiftround = true;
-    shiftwidth = tabSize;
-    signcolumn = "yes";
-  }
+  shiftround = true;
+  shiftwidth = tabSize;
+  signcolumn = "yes";
+}

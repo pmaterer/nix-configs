@@ -58,6 +58,7 @@
       tflint
       #terragrunt
       terrascan
+      terramate
 
       # vms
       packer
@@ -74,6 +75,9 @@
       argocd
       eks-node-viewer
       kubie
+
+      # crossplane
+      upbound
 
       # charmbracelet
       glow
