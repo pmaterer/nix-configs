@@ -3,6 +3,7 @@ let
   settings = import ./settings.nix;
   keymaps = import ./keymaps.nix;
   colorschemes = import ./colorschemes.nix;
+  autocmd = import ./autocmd.nix;
   plugins = import ./plugins;
 in {
   enable = true;
@@ -17,6 +18,7 @@ in {
   opts = settings;
   keymaps = keymaps;
   colorschemes = colorschemes;
+  autoCmd = autocmd;
 
   plugins = plugins;
 }

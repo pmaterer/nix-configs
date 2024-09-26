@@ -71,16 +71,23 @@
       }
     ];
   userSettings = {
-    "workbench.colorTheme" = "Gruvbox Dark Hard";
+    "editor.fontFamily" = "GohuFont 14 Nerd Font Mono";
+    "editor.fontSize" = 14;
+    
+    "terminal.integrated.fontFamily" = "monospace";
+    "terminal.integrated.fontSize" = "12";
+    "terminal.integrated.sendKeybindingsToShell" = false;
+
+    "workbench.colorTheme" = "Catppuccin Mocha";
+    
     "git.autofetch" = true;
     "git.confirmSync" = false;
+    
     "explorer.confirmDelete" = false;
-    "nixfmt.path" = "${pkgs.nixfmt-classic}/bin/nixfmt";
+    "nix.formatterPath" = "${pkgs.nixfmt-classic}/bin/nixfmt";
+    
     "[nix]" = { "editor.defaultFormatter" = "jnoortheen.nix-ide"; };
-    "editor.fontFamily" = "FantasqueSansM Nerd Font Mono";
-    "editor.fontSize" = 12;
     "[json]" = { "editor.defaultFormatter" = "vscode.json-language-features"; };
     "[typescript]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
-    "terminal.integrated.sendKeybindingsToShell" = true;
   };
 }

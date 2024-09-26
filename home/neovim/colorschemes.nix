@@ -1,6 +1,1 @@
-{
-  base16 = {
-    enable = true;
-    colorscheme = "darcula";
-  };
-}
+{ catppuccin = { enable = true; }; }

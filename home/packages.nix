@@ -21,6 +21,8 @@
 
       agenix.packages.${system}.default
 
+      oil
+
       # etc
       imagemagick
       nerdfonts
@@ -42,8 +44,8 @@
       # development
       shellcheck
       python3
-      nodejs_latest
-      yarn
+      #nodejs_latest
+      #yarn
       asdf-vm
 
       # networking

@@ -8,6 +8,11 @@
     secrets.certs.file = ../secrets/certs.age;
   };
 
+  catppuccin = {
+    enable = true;
+    flavor = "mocha";
+  };
+
   home = {
     stateVersion = "23.05";
     preferXdgDirectories = true;
@@ -31,9 +36,6 @@
         client_id = "3294e1e273f442519e5abf3b7bafed99"
       '';
 
-      "alacritty/theme.toml".source =
-        ./alacritty/themes/gruvbox_material_hard_dark.toml;
-      "alacritty/themes".source = ./alacritty/themes;
     } // pkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
       "libvirt/qemu.conf".text = ''
         nvram = [ "/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd"]

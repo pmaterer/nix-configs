@@ -7,7 +7,7 @@
   mouse = true;
   shortcut = "C-f";
   historyLimit = 50000;
-  sensibleOnTop = true;
+  sensibleOnTop = false;
   plugins = with pkgs; [
     { plugin = tmuxPlugins.yank; }
     { plugin = tmuxPlugins.weather; }

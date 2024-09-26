@@ -2,7 +2,6 @@
   enable = true;
 
   settings = {
-    import = [ "~/.config/alacritty/themes/biscuit-dark.toml" ];
     window = {
       dimensions = {
         columns = 150;
@@ -14,9 +13,9 @@
       };
     };
     font = {
-      size = 12.0;
+      size = 14.0;
       normal = {
-        family = "Iosevka Nerd Font Mono";
+        family = "GohuFont 14 Nerd Font Mono";
         style = "Regular";
       };
     };
