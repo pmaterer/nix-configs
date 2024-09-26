@@ -73,19 +73,19 @@
   userSettings = {
     "editor.fontFamily" = "GohuFont 14 Nerd Font Mono";
     "editor.fontSize" = 14;
-    
+
     "terminal.integrated.fontFamily" = "monospace";
     "terminal.integrated.fontSize" = "12";
     "terminal.integrated.sendKeybindingsToShell" = false;
 
     "workbench.colorTheme" = "Catppuccin Mocha";
-    
+
     "git.autofetch" = true;
     "git.confirmSync" = false;
-    
+
     "explorer.confirmDelete" = false;
     "nix.formatterPath" = "${pkgs.nixfmt-classic}/bin/nixfmt";
-    
+
     "[nix]" = { "editor.defaultFormatter" = "jnoortheen.nix-ide"; };
     "[json]" = { "editor.defaultFormatter" = "vscode.json-language-features"; };
     "[typescript]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };

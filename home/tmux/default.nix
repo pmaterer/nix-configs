@@ -47,25 +47,36 @@
     bind P paste-buffer
     bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "pbcopy"
 
+    set-option -g default-terminal "screen-256color"
+
     # statusbar
     set -g status on
     set -g status-interval 1
     set -g status-justify centre
     set -g status-keys vi
     set -g status-position top
-    set -g status-style fg=black,bg=blue
+    set-option -g status-style bg='#1b1c36',fg='#ecf0c1'
 
     set -g status-right-length 140
     set -g status-right-style default
     set -g status-right "%H:%M:%S %d-%m-%Y"
 
-    set -g window-status-style fg=black
     set -g window-status-format ' #I #W '
 
-    set -g window-status-current-style fg=white,bg=black
+    # Active window
+    set-option -g window-status-current-style bg='#686f9a',fg='#ffffff'
     set -g window-status-current-format ' #I #W '
 
-    set -g pane-active-border-style fg=red,bg=black
-    set -g pane-border-style fg=white,bg=black
+    # Active pane
+    set -g pane-active-border-style "fg=#5ccc96"
+    # Inactive pane
+    set -g pane-border-style "fg=#686f9a"
+
+    # Message
+    set-option -g message-style bg='#686f9a',fg='#ecf0c1'
+    set-option -g message-command-style bg='#686f9a',fg='#ecf0c1'
+
+    # When commands are run
+    set -g message-style "fg=#0f111b,bg=#686f9a"
   '';
 }

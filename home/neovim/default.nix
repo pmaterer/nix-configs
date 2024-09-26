@@ -1,24 +1,34 @@
 # https://nix-community.github.io/nixvim/
+{ pkgs }:
 let
-  settings = import ./settings.nix;
+  opts = import ./opts.nix;
   keymaps = import ./keymaps.nix;
-  colorschemes = import ./colorschemes.nix;
-  autocmd = import ./autocmd.nix;
+  autoCmd = import ./autocmd.nix;
   plugins = import ./plugins;
 in {
+  inherit keymaps plugins autoCmd opts;
   enable = true;
   defaultEditor = true;
   viAlias = true;
   vimAlias = true;
-  # package = pkgs.neovim-nightly;
 
   globals.mapleader = ",";
   clipboard.register = "unnamedplus";
 
-  opts = settings;
-  keymaps = keymaps;
-  colorschemes = colorschemes;
-  autoCmd = autocmd;
+  extraPlugins =
+    let
+      spaceduck = pkgs.vimUtils.buildVimPlugin {
+        name = "spaceduck";
+        src = pkgs.fetchFromGitHub {
+          owner = "pineapplegiant";
+          repo = "spaceduck";
+          rev = "main";
+          sha256 = "sha256-lE8y9BA2a4y0B6O3+NyOS7numoltmzhArgwTAner2fE=";
+        };
+      };
+    in [
+      spaceduck
+    ];
 
-  plugins = plugins;
+    colorscheme = "spaceduck";
 }

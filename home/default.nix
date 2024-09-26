@@ -9,7 +9,7 @@
   };
 
   catppuccin = {
-    enable = true;
+    enable = false;
     flavor = "mocha";
   };
 
@@ -35,6 +35,7 @@
       "spotify-player/app.toml".text = ''
         client_id = "3294e1e273f442519e5abf3b7bafed99"
       '';
+      "alacritty/theme.toml".source = ./alacritty/theme.toml;
 
     } // pkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
       "libvirt/qemu.conf".text = ''
@@ -51,7 +52,7 @@
     zsh = import ./zsh { inherit pkgs config; };
     git = import ./git { inherit pkgs defaultEmail; };
     vscode = import ./vscode { inherit pkgs; };
-    nixvim = import ./neovim;
+    nixvim = import ./neovim { inherit pkgs; };
     direnv = {
       enable = true;
       nix-direnv.enable = true;
