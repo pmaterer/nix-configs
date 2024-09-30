@@ -163,4 +163,22 @@ in [
     action = "<CMD>NvimTreeFindFile<CR>";
     options = defaultOptions;
   }
+
+  # spectre
+  {
+    key = "<leader>S";
+    action = "<cmd>lua require(\"spectre\").toggle()<cr>";
+    options = defaultOptions;
+  }
+  {
+    key = "<leader>sw";
+    action = "<cmd>lua require(\"spectre\").open_visual({select_word=true})<cr>";
+    options = defaultOptions;
+  }
+  {
+    mode = "v";
+    key = "<leader>sw";
+    action = "<esc><cmd>lua require(\"spectre\").open_visual()<cr>";
+    options = defaultOptions;
+  }
 ]

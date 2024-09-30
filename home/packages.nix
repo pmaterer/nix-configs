@@ -10,6 +10,7 @@
       yq
       gnutar
       gnumake
+      gnused
       unzip
 
       dnsmasq

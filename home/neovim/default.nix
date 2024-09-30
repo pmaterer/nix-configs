@@ -4,7 +4,7 @@ let
   opts = import ./opts.nix;
   keymaps = import ./keymaps.nix;
   autoCmd = import ./autocmd.nix;
-  plugins = import ./plugins;
+  plugins = import ./plugins { inherit pkgs; };
 in {
   inherit keymaps plugins autoCmd opts;
   enable = true;
@@ -30,5 +30,10 @@ in {
       spaceduck
     ];
 
-    colorscheme = "spaceduck";
+    #colorscheme = "spaceduck";
+    colorschemes = {
+      oxocarbon.enable = true;
+    };
+
+    extraPackages = with pkgs; [ gnused ];
 }

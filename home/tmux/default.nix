@@ -10,7 +10,6 @@
   sensibleOnTop = false;
   plugins = with pkgs; [
     { plugin = tmuxPlugins.yank; }
-    { plugin = tmuxPlugins.weather; }
   ];
 
   extraConfig = ''
@@ -46,6 +45,8 @@
     bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
     bind P paste-buffer
     bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "pbcopy"
+
+    set-option -g default-command "reattach-to-user-namespace -l $SHELL"
 
     set-option -g default-terminal "screen-256color"
 

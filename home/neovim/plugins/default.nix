@@ -1,7 +1,7 @@
+{ pkgs }:
 {
   nvim-autopairs.enable = true;
 
-  # https://github.com/norcalli/nvim-colorizer.lua
   nvim-colorizer = {
     enable = true;
     userDefaultOptions.names = false;
@@ -18,6 +18,17 @@
     enable = true;
     openOnSetupFile = true;
     autoReloadOnWrite = true;
+  };
+
+  spectre = {
+    enable = true;
+    findPackage = pkgs.ripgrep;
+    replacePackage = pkgs.gnused;
+    settings = {
+      replace = {
+        cmd = "${pkgs.gnused}/bin/sed";
+      };
+    };
   };
 
   lualine.enable = true;
@@ -51,14 +62,19 @@
   lsp = {
     enable = true;
     servers = {
-      # web
+      bashls = { enable = true; };
+      docker-compose-language-service = { enable = true; };
+      dockerls = { enable = true; };
       eslint = { enable = true; };
-      html = { enable = true; };
-      tsserver = { enable = true; };
-
       gopls = { enable = true; };
-
+      helm-ls = { enable = true; };
+      html = { enable = true; };
+      lua-ls = { enable = true; };
+      nixd = { enable = true; };
+      pylsp = { enable = true; };
+      tsserver = { enable = true; };
       terraformls = { enable = true; };
+      yamlls = { enable = true; };
     };
     keymaps = {
       silent = true;
@@ -78,47 +94,37 @@
     };
   };
 
-  # autocomplete
+  # Autocomplete
   cmp = {
     enable = true;
     settings = {
       autoEnableSources = true;
       experimental = { ghost_text = true; };
-      performance = {
-        debounce = 60;
-        fetchingTimeout = 200;
-        maxViewEntries = 30;
-      };
-      sources = [
-        { name = "git"; }
-        { name = "nvim_lsp"; }
-        { name = "emoji"; }
-        {
-          name = "path";
-          keywordLength = 3;
-        }
+      sources = map (name: { inherit name; }) [
+        "nvim_lsp"
+        "nvim_lua"
+        "git"
+        "emoji"
+        "path"
+        "buffer"
+        "luasnip"
+        "cmdline"
       ];
-      window = {
-        completion = { border = "solid"; };
-        documentation = { border = "solid"; };
-      };
       mapping = {
-        "<C-Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
-        "<C-j>" = "cmp.mapping.select_next_item()";
-        "<C-k>" = "cmp.mapping.select_prev_item()";
-        "<C-e>" = "cmp.mapping.abort()";
-        "<C-b>" = "cmp.mapping.scroll_docs(-4)";
-        "<C-f>" = "cmp.mapping.scroll_docs(4)";
+        "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+        "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
+        "<CR>" = "cmp.mapping.confirm({ select = true})";
         "<C-Space>" = "cmp.mapping.complete()";
-        "<C-CR>" = "cmp.mapping.confirm({select = true})";
-        "<S-CR>" =
-          "cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = true})";
+        "<C-e>" = "cmp.mapping.abort()";
+        "<C-f>" = "cmp.mapping.scroll_docs(4)";
+        "<C-d>" = "cmp.mapping.scroll_docs(-4)";
       };
+      snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
     };
   };
-  cmp-emoji.enable = true;
-  cmp-nvim-lsp.enable = true;
-  cmp-buffer.enable = true;
-  cmp-path.enable = true;
-  cmp-cmdline.enable = true;
+  luasnip.enable = true;
+  friendly-snippets.enable = true;
+
+  lint.enable = true;
+  conform-nvim.enable = true;
 }
