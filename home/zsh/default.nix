@@ -1,4 +1,7 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }: let
+  git = "${pkgs.git}/bin/git";
+  asdfShare = "${pkgs.asdf-vm}/share";
+in {
   enable = true;
 
   enableCompletion = true;
@@ -16,8 +19,8 @@
 
     source <(kubectl completion zsh)
 
-    . "${pkgs.asdf-vm}/share/asdf-vm/asdf.sh"
-    . "${pkgs.asdf-vm}/share/asdf-vm/completions/asdf.bash"
+    . "${asdfShare}/asdf-vm/asdf.sh"
+    . "${asdfShare}/share/asdf-vm/completions/asdf.bash"
 
     export PATH=$PATH:~/.npm/bin
     export PATH="$HOME/.krew/bin:$PATH"
@@ -27,6 +30,8 @@
     [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
     [[ -f $PYENV_ROOT/plugins/pyenv-virtualenv ]] && eval "$(pyenv virtualenv-init -)"
+
+    eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"
 
   '' + (if pkgs.stdenv.isLinux then ''
     export OVMF_PATH="${pkgs.OVMF.fd}/FV"
@@ -67,6 +72,22 @@
     tfc = "terraform-docs . && terraform fmt && tflint";
 
     spt = "spotify_player";
+
+    # git
+    gs = "${git} status";
+    
+    gc = "${git} checkout";
+    gcb = "${git} checkout -b";
+
+    ga = "${git} add .";
+    gap = "${git} add -p";
+
+    gb = "${git} branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
+
+    gdc = "${git} diff --cached";
+
+    gpt = "${git} add . && ${git} commit -m \"Testing\" && ${git} push";
+
   };
 
   sessionVariables = {

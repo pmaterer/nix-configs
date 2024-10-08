@@ -181,4 +181,41 @@ in [
     action = "<esc><cmd>lua require(\"spectre\").open_visual()<cr>";
     options = defaultOptions;
   }
+
+  # fugitive
+  {
+    key = "<leader>gs";
+    action = "<CMD>G<CR>";
+    options = defaultOptions;
+  }
+  {
+    key = "<leader>gw";
+    action = "<CMD>Gwrite<CR>";
+    options = defaultOptions;
+  }
+  {
+    key = "<leader>gc";
+    action = "<CMD>G commit<CR>";
+    options = defaultOptions;
+  }
+  {
+    key = "<leader>gp";
+    action = "<CMD>G push<CR>";
+    options = defaultOptions;
+  }
+  {
+    key = "<leader>gP";
+    action = "<CMD>G pull<CR>";
+    options = defaultOptions;
+  }
+  {
+    key = "<leader>gb";
+    action = "<CMD>G blame<CR>";
+    options = defaultOptions;
+  }
+  {
+    key = "<leader>gd";
+    action = "<CMD>G diffsplit<CR>";
+    options = defaultOptions;
+  }
 ]

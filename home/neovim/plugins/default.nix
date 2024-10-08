@@ -20,6 +20,9 @@
     autoReloadOnWrite = true;
   };
 
+  fugitive.enable = true;
+  gitsigns.enable = true;
+
   spectre = {
     enable = true;
     findPackage = pkgs.ripgrep;
@@ -51,6 +54,21 @@
       file_ignore_patterns = [ "^.git/" ];
       set_env.COLORTERM = "truecolor";
     };
+  };
+
+  treesitter = {
+    enable = true;
+    grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+      bash
+      json
+      make
+      markdown
+      nix
+      regex
+      toml
+      xml
+      yaml
+    ];
   };
 
   # LSP

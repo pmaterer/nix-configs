@@ -15,6 +15,8 @@
 
       dnsmasq
 
+      zoxide
+
       step-cli
       step-ca
 
@@ -28,6 +30,7 @@
       imagemagick
       nerdfonts
       cowsay
+      ponysay
       fortune
       lolcat
       gmailctl
