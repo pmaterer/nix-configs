@@ -1,5 +1,4 @@
-{ pkgs }:
-{
+{ pkgs }: {
   nvim-autopairs.enable = true;
 
   nvim-colorizer = {
@@ -27,11 +26,7 @@
     enable = true;
     findPackage = pkgs.ripgrep;
     replacePackage = pkgs.gnused;
-    settings = {
-      replace = {
-        cmd = "${pkgs.gnused}/bin/sed";
-      };
-    };
+    settings = { replace = { cmd = "${pkgs.gnused}/bin/sed"; }; };
   };
 
   lualine.enable = true;
@@ -137,7 +132,8 @@
         "<C-f>" = "cmp.mapping.scroll_docs(4)";
         "<C-d>" = "cmp.mapping.scroll_docs(-4)";
       };
-      snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
+      snippet.expand =
+        "function(args) require('luasnip').lsp_expand(args.body) end";
     };
   };
   luasnip.enable = true;

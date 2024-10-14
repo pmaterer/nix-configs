@@ -15,25 +15,20 @@ in {
   globals.mapleader = ",";
   clipboard.register = "unnamedplus";
 
-  extraPlugins =
-    let
-      spaceduck = pkgs.vimUtils.buildVimPlugin {
-        name = "spaceduck";
-        src = pkgs.fetchFromGitHub {
-          owner = "pineapplegiant";
-          repo = "spaceduck";
-          rev = "main";
-          sha256 = "sha256-lE8y9BA2a4y0B6O3+NyOS7numoltmzhArgwTAner2fE=";
-        };
+  extraPlugins = let
+    spaceduck = pkgs.vimUtils.buildVimPlugin {
+      name = "spaceduck";
+      src = pkgs.fetchFromGitHub {
+        owner = "pineapplegiant";
+        repo = "spaceduck";
+        rev = "main";
+        sha256 = "sha256-lE8y9BA2a4y0B6O3+NyOS7numoltmzhArgwTAner2fE=";
       };
-    in [
-      spaceduck
-    ];
-
-    #colorscheme = "spaceduck";
-    colorschemes = {
-      oxocarbon.enable = true;
     };
+  in [ spaceduck ];
 
-    extraPackages = with pkgs; [ gnused ];
+  #colorscheme = "spaceduck";
+  colorschemes = { oxocarbon.enable = true; };
+
+  extraPackages = with pkgs; [ gnused ];
 }

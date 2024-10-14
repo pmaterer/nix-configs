@@ -1,4 +1,5 @@
-{ pkgs, config, ... }: let
+{ pkgs, config, ... }:
+let
   git = "${pkgs.git}/bin/git";
   asdfShare = "${pkgs.asdf-vm}/share";
 in {
@@ -75,18 +76,19 @@ in {
 
     # git
     gs = "${git} status";
-    
+
     gc = "${git} checkout";
     gcb = "${git} checkout -b";
 
     ga = "${git} add .";
     gap = "${git} add -p";
 
-    gb = "${git} branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
+    gb =
+      "${git} branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
 
     gdc = "${git} diff --cached";
 
-    gpt = "${git} add . && ${git} commit -m \"Testing\" && ${git} push";
+    gpt = ''${git} add . && ${git} commit -m "Testing" && ${git} push'';
 
   };
 

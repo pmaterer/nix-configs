@@ -167,18 +167,19 @@ in [
   # spectre
   {
     key = "<leader>S";
-    action = "<cmd>lua require(\"spectre\").toggle()<cr>";
+    action = ''<cmd>lua require("spectre").toggle()<cr>'';
     options = defaultOptions;
   }
   {
     key = "<leader>sw";
-    action = "<cmd>lua require(\"spectre\").open_visual({select_word=true})<cr>";
+    action =
+      ''<cmd>lua require("spectre").open_visual({select_word=true})<cr>'';
     options = defaultOptions;
   }
   {
     mode = "v";
     key = "<leader>sw";
-    action = "<esc><cmd>lua require(\"spectre\").open_visual()<cr>";
+    action = ''<esc><cmd>lua require("spectre").open_visual()<cr>'';
     options = defaultOptions;
   }
 
