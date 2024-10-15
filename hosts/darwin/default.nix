@@ -41,6 +41,7 @@
       "spotify_player"
       "opa"
       "terragrunt"
+      "deno"
       "gnu-sed" # needed by nvim-spectre
       "reattach-to-user-namespace" # used with tmux to enable touch id sudo
     ];

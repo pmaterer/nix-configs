@@ -21,7 +21,7 @@ in {
     source <(kubectl completion zsh)
 
     . "${asdfShare}/asdf-vm/asdf.sh"
-    . "${asdfShare}/share/asdf-vm/completions/asdf.bash"
+    . "${asdfShare}/asdf-vm/completions/asdf.bash"
 
     export PATH=$PATH:~/.npm/bin
     export PATH="$HOME/.krew/bin:$PATH"

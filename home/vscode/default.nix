@@ -19,6 +19,7 @@
       bradlc.vscode-tailwindcss
       streetsidesoftware.code-spell-checker
       jdinhlife.gruvbox
+      denoland.vscode-deno
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       # use pkgs.lib.fakeSha256 to get sha256
       {
