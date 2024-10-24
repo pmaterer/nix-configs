@@ -27,11 +27,10 @@
       url = "github:lilyinstarlight/nixos-cosmic";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = { self, nixpkgs, nix-darwin, home-manager, nixvim
-    , neovim-nightly-overlay, hosts, agenix, cosmic, catppuccin }: {
+    , neovim-nightly-overlay, hosts, agenix, cosmic }: {
       # work
       darwinConfigurations.Patricks-MacBook-Pro-2 = let
         username = "pmaterer";
@@ -50,7 +49,6 @@
               backupFileExtension = "hm-backup";
               sharedModules = [
                 agenix.homeManagerModules.age # add age config
-                catppuccin.homeManagerModules.catppuccin
               ];
               extraSpecialArgs = {
                 inherit nixvim agenix system;

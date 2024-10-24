@@ -15,7 +15,6 @@
       ms-azuretools.vscode-docker
       redhat.vscode-yaml
       ms-vscode.makefile-tools
-      catppuccin.catppuccin-vsc-icons
       bradlc.vscode-tailwindcss
       streetsidesoftware.code-spell-checker
       jdinhlife.gruvbox
@@ -79,7 +78,7 @@
     "terminal.integrated.fontSize" = "12";
     "terminal.integrated.sendKeybindingsToShell" = false;
 
-    "workbench.colorTheme" = "Catppuccin Mocha";
+    #"workbench.colorTheme" = "Catppuccin Mocha";
 
     "git.autofetch" = true;
     "git.confirmSync" = false;

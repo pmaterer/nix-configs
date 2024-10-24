@@ -8,11 +8,6 @@
     secrets.certs.file = ../secrets/certs.age;
   };
 
-  catppuccin = {
-    enable = false;
-    flavor = "mocha";
-  };
-
   home = {
     stateVersion = "23.05";
     preferXdgDirectories = true;
