@@ -52,7 +52,6 @@
       #yarn
       asdf-vm
 
-
       # networking
       ipcalc
       curl
