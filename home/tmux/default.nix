@@ -44,7 +44,7 @@
     bind P paste-buffer
     bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "pbcopy"
 
-    set-option -g default-command "reattach-to-user-namespace -l $SHELL"
+    #set-option -g default-command "reattach-to-user-namespace -l $SHELL"
 
     set-option -g default-terminal "screen-256color"
 
