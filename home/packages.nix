@@ -94,6 +94,8 @@
 
       # ai
       llama-cpp
+
+      vlc
     ] ++ (if pkgs.stdenv.isLinux then
       with pkgs; [
         terraform-docs
