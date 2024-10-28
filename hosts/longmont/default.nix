@@ -60,9 +60,13 @@
 
   users.users.patrick = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
+    extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
     packages = with pkgs; [ firefox bitwarden-desktop ];
     shell = pkgs.zsh;
+  };
+
+  virtualisation = {
+    docker.enable = true;
   };
 
   system.stateVersion = "24.05";
