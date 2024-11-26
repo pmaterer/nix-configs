@@ -28,7 +28,7 @@ in {
   in [ spaceduck ];
 
   #colorscheme = "spaceduck";
-  colorschemes = { oxocarbon.enable = true; };
+  colorschemes = { melange.enable = true; };
 
   extraPackages = with pkgs; [ gnused ];
 }

@@ -14,7 +14,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   networking = {
-    hostName = "longmont";
+    hostName = "letterkenny";
     networkmanager.enable = true;
   };
 
@@ -46,14 +46,6 @@
     openssh.enable = true;
     ntp.enable = true;
     blueman.enable = true;
-  };
-
-  hardware = {
-    bluetooth = {
-      enable = true;
-      powerOnBoot = true;
-    };
-    # pulseaudio.enable = true;
   };
 
   programs.zsh.enable = true;

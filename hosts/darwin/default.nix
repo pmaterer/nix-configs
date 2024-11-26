@@ -32,7 +32,6 @@
 
     taps = [ "ggpeti/rmrec" "homebrew/services" "int128/kubelogin" ];
     brews = [
-      "cloudsplaining"
       "oidc-kubelogin"
       "terraform-docs"
       "doggo"
@@ -42,8 +41,10 @@
       "opa"
       "terragrunt"
       "deno"
+      "golangci-lint"
       "gnu-sed" # needed by nvim-spectre
       "reattach-to-user-namespace" # used with tmux to enable touch id sudo
+      "postgresql@17"
     ];
     casks = [
       "alacritty"
@@ -63,6 +64,7 @@
       "gimp"
       "wezterm"
       "db-browser-for-sqlite"
+      "nikitabobko/tap/aerospace"
     ];
   };
 

@@ -12,6 +12,7 @@
       gnumake
       gnused
       unzip
+      sd
 
       dnsmasq
 
@@ -95,7 +96,6 @@
       # ai
       llama-cpp
 
-      vlc
     ] ++ (if pkgs.stdenv.isLinux then
       with pkgs; [
         terraform-docs
@@ -114,6 +114,8 @@
         libxslt # for libvirt Terraform
 
         xclip
+
+        vlc
       ]
     else
       [ ]);

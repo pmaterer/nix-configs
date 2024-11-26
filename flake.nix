@@ -4,7 +4,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,19 +22,16 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    cosmic = {
-      url = "github:lilyinstarlight/nixos-cosmic";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = { self, nixpkgs, nix-darwin, home-manager, nixvim
-    , neovim-nightly-overlay, hosts, agenix, cosmic }: {
-      # work
+    , neovim-nightly-overlay, hosts, agenix }: {
+      # $WORK
       darwinConfigurations.Patricks-MacBook-Pro-2 = let
         username = "pmaterer";
         system = "aarch64-darwin";
         overlays = [ neovim-nightly-overlay.overlays.default ];
+        pkgs = nixpkgs.legacyPackages.${system};
       in nix-darwin.lib.darwinSystem {
         inherit system;
         modules = [
@@ -60,21 +56,21 @@
           {
             users.users.${username} = {
               home = "/Users/${username}";
-              shell = nixpkgs.zsh;
+              shell = pkgs.zsh;
             };
           }
           { nixpkgs.overlays = overlays; }
         ];
       };
 
-      nixosConfigurations.longmont = let
-        username = "patrick";
+      nixosConfigurations.letterkenny = let
+        username = "pmaterer";
         system = "x86_64-linux";
         overlays = [ neovim-nightly-overlay.overlays.default ];
       in nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          ./hosts/longmont
+          ./hosts/letterkenny
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -94,15 +90,6 @@
           { nixpkgs.overlays = overlays; }
           hosts.nixosModule
           { networking.stevenBlackHosts.enable = true; }
-          {
-            nix.settings = {
-              substituters = [ "https://cosmic.cachix.org/" ];
-              trusted-public-keys = [
-                "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
-              ];
-            };
-          }
-          cosmic.nixosModules.default
         ];
       };
     };

@@ -30,7 +30,7 @@
       "spotify-player/app.toml".text = ''
         client_id = "3294e1e273f442519e5abf3b7bafed99"
       '';
-      "alacritty/theme.toml".source = ./alacritty/oxocarbon-dark-theme.toml;
+      "alacritty/theme.toml".source = ./alacritty/melange_dark.toml;
 
     } // pkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
       "libvirt/qemu.conf".text = ''
