@@ -46,7 +46,7 @@
 
   programs.zsh.enable = true;
 
-  users.users.patrick = {
+  users.users.pmaterer = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
     packages = with pkgs; [ firefox bitwarden-desktop ];
