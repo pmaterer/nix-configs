@@ -22,10 +22,14 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, nix-darwin, home-manager, nixvim
-    , neovim-nightly-overlay, hosts, agenix }: {
+    , neovim-nightly-overlay, hosts, agenix, disko }: {
       # $WORK
       darwinConfigurations.Patricks-MacBook-Pro-2 = let
         username = "pmaterer";
@@ -90,6 +94,7 @@
           { nixpkgs.overlays = overlays; }
           hosts.nixosModule
           { networking.stevenBlackHosts.enable = true; }
+          disko.nixosModules.disko
         ];
       };
     };

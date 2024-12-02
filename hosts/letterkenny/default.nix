@@ -1,6 +1,6 @@
 { pkgs, config, lib, ... }: {
 
-  imports = [ ./hardware-configuration.nix ./libvirt.nix ];
+  imports = [ ./hardware-configuration.nix ./libvirt.nix ./disks.nix ];
 
   boot = {
     loader = {
