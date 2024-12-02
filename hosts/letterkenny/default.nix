@@ -23,11 +23,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   services = {
-    displayManager = {
-      defaultSession = "plasma";
-      cosmic-greeter.enable = true;
-    };
-    desktopManager.cosmic.enable = true;
+    displayManager = { defaultSession = "plasma"; };
 
     xserver = {
       enable = true;
