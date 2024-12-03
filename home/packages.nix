@@ -29,7 +29,7 @@
 
       # etc
       imagemagick
-      nerdfonts
+      #nerdfonts
       cowsay
       ponysay
       fortune
