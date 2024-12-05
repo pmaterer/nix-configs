@@ -22,6 +22,36 @@ sudo dhcpcd
 ping -c 3 google.com
 ```
 
+
+
+
+
+
+```
+nix-shell -p git
+git clone https://github.com/pmaterer/nix-configs.git
+cd nix-configs
+
+
+# Run disko
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disk/latest -- --mode disko hosts/letterkenny/disks.nix
+
+sudo nixos-install --flake .#letterkenny
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Now set the root user password:
 
 ```sh
