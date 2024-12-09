@@ -114,6 +114,8 @@
 
         libxslt # for libvirt Terraform
 
+        terraform
+
         xclip
 
         vlc
