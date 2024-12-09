@@ -29,7 +29,7 @@
 
       # etc
       imagemagick
-      #nerdfonts
+      nerdfonts
       cowsay
       ponysay
       fortune
@@ -49,9 +49,10 @@
       # development
       shellcheck
       python3
-      #nodejs_latest
-      #yarn
+      nodejs_latest
+      yarn
       asdf-vm
+      devenv
 
       # networking
       ipcalc
