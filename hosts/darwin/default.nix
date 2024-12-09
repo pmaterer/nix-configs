@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, system, ... }: {
   services = { nix-daemon.enable = true; };
 
   security.pam.enableSudoTouchIdAuth = true;
@@ -7,7 +7,7 @@
   # Creates /etc/zshrc that load the nix-darwin environment
   programs.zsh.enable = true;
 
-  nixpkgs.hostPlatform = "aarch64-darwin";
+  # nixpkgs.hostPlatform = system;
   nixpkgs.config.allowUnfree = true;
 
   nix = {
