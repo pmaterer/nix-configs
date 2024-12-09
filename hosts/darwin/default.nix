@@ -65,6 +65,7 @@
       "wezterm"
       "db-browser-for-sqlite"
       "nikitabobko/tap/aerospace"
+      "chatgpt"
     ];
   };
 
