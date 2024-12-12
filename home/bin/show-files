@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import fnmatch
+import argparse
 
 def load_gitignore_patterns(directory):
     gitignore_path = os.path.join(directory, '.gitignore')
@@ -26,7 +27,9 @@ def should_ignore(path, patterns):
 
 def walk_directory(directory, patterns):
     for root, dirs, files in os.walk(directory):
+        # Filter out ignored directories
         dirs[:] = [d for d in dirs if not should_ignore(os.path.join(root, d), patterns)]
+        
         for file in files:
             file_path = os.path.join(root, file)
             if not should_ignore(file_path, patterns):
@@ -41,9 +44,23 @@ def walk_directory(directory, patterns):
                 print("\n" + "-"*40 + "\n")
 
 def main():
+    parser = argparse.ArgumentParser(description="Recursively print files and their contents.")
+    parser.add_argument(
+        "--ignore", 
+        action="append", 
+        default=[], 
+        help="Ignore files or directories matching the pattern. Can be passed multiple times."
+    )
+    args = parser.parse_args()
+
     directory = '.'
     gitignore_patterns = load_gitignore_patterns(directory)
-    walk_directory(directory, gitignore_patterns)
+    
+    # Add user-specified patterns to gitignore patterns
+    all_patterns = gitignore_patterns + args.ignore
+
+    # Run the walker
+    walk_directory(directory, all_patterns)
 
 if __name__ == "__main__":
     main()

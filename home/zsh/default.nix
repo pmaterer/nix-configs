@@ -58,6 +58,9 @@ in {
     netshoot = "k run tmp-shell --rm -i --tty --image nicolaka/netshoot";
     kill-pod = "k delete pod --force --grace-period=0";
 
+    k-pods-count =
+      "${pkgs.kubectl}/bin/kubectl get pods --all-namespaces -o json | jq -r '.items | group_by(.metadata.namespace) | map({\"namespace\": .[0].metadata.namespace, \"running_pods\": map(select(.status.phase == \"Running\")) | length}) | sort_by(.namespace) | .[] | \"(.namespace): (.running_pods)\"'";
+
     ctar = "${pkgs.gnutar}/bin/tar -czvf";
     otar = "${pkgs.gnutar}/bin/tar -xcf";
 
@@ -90,6 +93,9 @@ in {
     gdc = "${git} diff --cached";
 
     gpt = ''${git} add . && ${git} commit -m "Testing" && ${git} push'';
+
+    # gitlab
+    glopen = "${pkgs.glab}/bin/glab repo view -w";
 
   };
 
