@@ -29,42 +29,62 @@
   };
 
   outputs = { self, nixpkgs, nix-darwin, home-manager, nixvim
-    , neovim-nightly-overlay, hosts, agenix, disko }: {
-      # $WORK
-      darwinConfigurations.Patricks-MacBook-Pro-2 = let
-        username = "pmaterer";
-        system = "aarch64-darwin";
-        overlays = [ neovim-nightly-overlay.overlays.default ];
-        pkgs = nixpkgs.legacyPackages.${system};
-      in nix-darwin.lib.darwinSystem {
-        inherit system;
-        modules = [
-          ./hosts/darwin
-          home-manager.darwinModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              verbose = true;
-              backupFileExtension = "hm-backup";
-              sharedModules = [
-                agenix.homeManagerModules.age # add age config
-              ];
-              extraSpecialArgs = {
-                inherit nixvim agenix system;
-                defaultEmail = "patrick.materer@socure.com";
+    , neovim-nightly-overlay, hosts, agenix, disko }:
+    let
+      mkDarwinConfig = { system, hostname, email, username }:
+        let
+          overlays = [ neovim-nightly-overlay.overlays.default ];
+          pkgs = nixpkgs.legacyPackages.${system};
+        in nix-darwin.lib.darwinSystem {
+          inherit system;
+          modules = [
+            # (import ./hosts/darwin { inherit pkgs system; })
+            ./hosts/darwin
+            home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                verbose = true;
+                backupFileExtension = "hm-backup";
+                sharedModules = [
+                  agenix.homeManagerModules.age # add age config
+                ];
+                extraSpecialArgs = {
+                  inherit nixvim agenix system;
+                  defaultEmail = "patrick.materer@socure.com";
+                };
+                users.${username} = import ./home;
               };
-              users.${username} = import ./home;
-            };
-          }
-          {
-            users.users.${username} = {
-              home = "/Users/${username}";
-              shell = pkgs.zsh;
-            };
-          }
-          { nixpkgs.overlays = overlays; }
-        ];
+            }
+            {
+              users.users.${username} = {
+                home = "/Users/${username}";
+                shell = pkgs.zsh;
+              };
+            }
+            { 
+              nixpkgs = {
+                hostPlatform = system;
+                overlays = overlays;
+              }; 
+             }
+          ];
+        };
+    in {
+      # $WORK
+      darwinConfigurations.Patricks-MacBook-Pro-2 = mkDarwinConfig {
+        system = "aarch64-darwin";
+        hostname = "Patricks-MacBook-Pro-2";
+        email = "patrick.materer@socure.com";
+        username = "pmaterer";
+      };
+
+      darwinConfigurations.trashcan = mkDarwinConfig {
+        system = "x86_64-darwin";
+        hostname = "trashcan";
+        email = "patrickmaterer@gmail.com";
+        username = "patrick";
       };
 
       nixosConfigurations.letterkenny = let
@@ -97,5 +117,6 @@
           disko.nixosModules.disko
         ];
       };
+
     };
 }

@@ -7,7 +7,6 @@
   # Creates /etc/zshrc that load the nix-darwin environment
   programs.zsh.enable = true;
 
-  nixpkgs.hostPlatform = "aarch64-darwin";
   nixpkgs.config.allowUnfree = true;
 
   nix = {
@@ -40,11 +39,15 @@
       "spotify_player"
       "opa"
       "terragrunt"
-      "deno"
       "golangci-lint"
       "gnu-sed" # needed by nvim-spectre
-      "reattach-to-user-namespace" # used with tmux to enable touch id sudo
       "postgresql@17"
+
+      {
+        name = "libvirt";
+        start_service = true;
+        restart_service = true;
+      }
     ];
     casks = [
       "alacritty"
@@ -63,9 +66,6 @@
       "vagrant"
       "gimp"
       "wezterm"
-      "db-browser-for-sqlite"
-      "nikitabobko/tap/aerospace"
-      "chatgpt"
     ];
   };
 

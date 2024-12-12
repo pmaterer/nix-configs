@@ -19,7 +19,7 @@
       streetsidesoftware.code-spell-checker
       jdinhlife.gruvbox
       denoland.vscode-deno
-#      ms-vscode-remote.vscode-remote-extensionpack
+      #      ms-vscode-remote.vscode-remote-extensionpack
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       # use pkgs.lib.fakeSha256 to get sha256
       {

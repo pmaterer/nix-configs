@@ -48,13 +48,9 @@
     zsh.enable = true;
     nix-ld = {
       enable = true;
-      libraries = with pkgs; [
-        libgcc
-        glibc
-      ];
+      libraries = with pkgs; [ libgcc glibc ];
     };
   };
-
 
   users.users.pmaterer = {
     isNormalUser = true;
@@ -63,11 +59,11 @@
     shell = pkgs.zsh;
   };
 
-  virtualisation = { 
-    docker.enable = true; 
+  virtualisation = {
+    docker.enable = true;
     virtualbox.host.enable = true;
   };
-  users.extraGroups.vboxusers.members = ["pmaterer"];
+  users.extraGroups.vboxusers.members = [ "pmaterer" ];
 
   system.stateVersion = "24.05";
 }
