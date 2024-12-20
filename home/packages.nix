@@ -97,6 +97,8 @@
       # ai
       llama-cpp
 
+      guacamole-client
+
     ] ++ (if pkgs.stdenv.isLinux then
       with pkgs; [
         terraform-docs
