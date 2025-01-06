@@ -26,10 +26,13 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
   };
 
   outputs = { self, nixpkgs, nix-darwin, home-manager, nixvim
-    , neovim-nightly-overlay, hosts, agenix, disko }:
+    , neovim-nightly-overlay, hosts, agenix, disko, ghostty }:
     let
       mkDarwinConfig = { system, hostname, email, username }:
         let
@@ -95,6 +98,7 @@
         inherit system;
         modules = [
           ./hosts/letterkenny
+          agenix.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -115,6 +119,7 @@
           hosts.nixosModule
           { networking.stevenBlackHosts.enable = true; }
           disko.nixosModules.disko
+          { environment.systemPackages = [ ghostty.packages.x86_64-linux.default ]; }
         ];
       };
 

@@ -121,6 +121,8 @@
         xclip
 
         vlc
+
+        opendrop
       ]
     else
       [ ]);

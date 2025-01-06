@@ -5,4 +5,5 @@ let
 in {
   "environment.age".publicKeys = users;
   "certs.age".publicKeys = users;
+  "tailscale.age".publicKeys = users;
 }

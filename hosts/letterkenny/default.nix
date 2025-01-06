@@ -1,6 +1,11 @@
 { pkgs, config, lib, ... }: {
 
-  imports = [ ./hardware-configuration.nix ./libvirt.nix ./disks.nix ];
+  imports = [ 
+    ./hardware-configuration.nix 
+    ./libvirt.nix 
+    ./disks.nix 
+    ./tailscale.nix
+  ];
 
   boot = {
     loader = {
@@ -22,6 +27,11 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
+  age = {
+    identityPaths = [ "/home/pmaterer/.ssh/nix-configs" ];    
+    secrets.tailscale.file = ../../secrets/tailscale.age;
+  };
+
   services = {
     displayManager = { defaultSession = "plasma"; };
 
@@ -42,6 +52,9 @@
     openssh.enable = true;
     ntp.enable = true;
     blueman.enable = true;
+    tailscale = {
+      enable = true;
+    };
   };
 
   programs = {
@@ -64,6 +77,7 @@
     virtualbox.host.enable = true;
   };
   users.extraGroups.vboxusers.members = [ "pmaterer" ];
+
 
   system.stateVersion = "24.05";
 }

@@ -6,6 +6,7 @@
     identityPaths = [ "${config.home.homeDirectory}/.ssh/nix-configs" ];
     secrets.environment.file = ../secrets/environment.age;
     secrets.certs.file = ../secrets/certs.age;
+    secrets.tailscale.file = ../secrets/tailscale.age;
   };
 
   home = {
@@ -31,6 +32,14 @@
         client_id = "3294e1e273f442519e5abf3b7bafed99"
       '';
       "alacritty/theme.toml".source = ./alacritty/melange_dark.toml;
+      "ghostty/config".text = ''
+        theme = duckbones
+        
+        keybind = super+d=text:\x06-
+        keybind = super+shift+d=text:\x06|
+        
+        keybind = super+enter=text:\x06\x7a
+      '';
 
     } // pkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
       "libvirt/qemu.conf".text = ''
