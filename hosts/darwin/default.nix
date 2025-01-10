@@ -34,15 +34,13 @@
       "oidc-kubelogin"
       "terraform-docs"
       "doggo"
-      "checkov"
       "qemu"
-      "spotify_player"
+      # "spotify_player"
       "opa"
       "terragrunt"
       "golangci-lint"
       "gnu-sed" # needed by nvim-spectre
       "postgresql@17"
-
       {
         name = "libvirt";
         start_service = true;
