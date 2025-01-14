@@ -26,9 +26,7 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
+    ghostty = { url = "github:ghostty-org/ghostty"; };
   };
 
   outputs = { self, nixpkgs, nix-darwin, home-manager, nixvim
@@ -66,12 +64,12 @@
                 shell = pkgs.zsh;
               };
             }
-            { 
+            {
               nixpkgs = {
                 hostPlatform = system;
                 overlays = overlays;
-              }; 
-             }
+              };
+            }
           ];
         };
     in {
@@ -119,7 +117,10 @@
           hosts.nixosModule
           { networking.stevenBlackHosts.enable = true; }
           disko.nixosModules.disko
-          { environment.systemPackages = [ ghostty.packages.x86_64-linux.default ]; }
+          {
+            environment.systemPackages =
+              [ ghostty.packages.x86_64-linux.default ];
+          }
         ];
       };
 

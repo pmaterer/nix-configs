@@ -1,8 +1,7 @@
 # https://tailscale.com/kb/1096/nixos-minecraft
-{ pkgs, config, ... }:
-{
-  systemd.services.tailscale-autoconnect =  {
-    
+{ pkgs, config, ... }: {
+  systemd.services.tailscale-autoconnect = {
+
     after = [ "network-pre.target" "tailscal.service" ];
     wants = [ "network-pre.target" "tailscal.service" ];
     wantedBy = [ "multi-user.target" ];
@@ -18,7 +17,7 @@
       fi
 
       authKey="$(cat ${config.age.secrets.tailscale.path})"
-    
+
       ${tailscale}/bin/tailscale up --auth-key $authKey
     '';
   };

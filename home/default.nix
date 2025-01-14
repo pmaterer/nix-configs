@@ -34,10 +34,10 @@
       "alacritty/theme.toml".source = ./alacritty/melange_dark.toml;
       "ghostty/config".text = ''
         theme = duckbones
-        
+
         keybind = super+d=text:\x06-
         keybind = super+shift+d=text:\x06|
-        
+
         keybind = super+enter=text:\x06\x7a
       '';
 
