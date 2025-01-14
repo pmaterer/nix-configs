@@ -27,6 +27,7 @@ in {
     export PATH="$HOME/.krew/bin:$PATH"
     export PATH="$HOME/bin:$PATH"
     export PATH="$HOME/.local/bin.go:$PATH"
+    export PATH="$HOME/nonix-bin:$PATH"
 
     export PYENV_ROOT="$HOME/.pyenv"
     [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
