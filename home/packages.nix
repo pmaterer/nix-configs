@@ -121,6 +121,8 @@
         vlc
 
         opendrop
+
+        file
       ]
     else
       [ ]);
