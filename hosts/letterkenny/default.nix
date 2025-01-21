@@ -40,7 +40,10 @@
 
       displayManager = { lightdm.enable = true; };
 
-      desktopManager = { plasma5.enable = true; };
+      desktopManager = { 
+        plasma5.enable = true;
+        enlightenment.enable = true; 
+      };
 
       videoDrivers = [ "nvidia" ];
     };
