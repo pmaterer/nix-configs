@@ -64,6 +64,7 @@
       "vagrant"
       "gimp"
       "wezterm"
+      "ghostty"
     ];
   };
 

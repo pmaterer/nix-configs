@@ -35,10 +35,21 @@
       "ghostty/config".text = ''
         theme = duckbones
 
-        keybind = super+d=text:\x06-
-        keybind = super+shift+d=text:\x06|
+        keybind = super+d=text:\x06|
+        keybind = super+shift+d=text:\x06-
 
         keybind = super+enter=text:\x06\x7a
+
+        font-family = "IosevkaTerm Nerd Font Mono"
+
+        background-opacity = 0.9
+
+        command = ${pkgs.zsh}/bin/zsh -l -c "${pkgs.tmux}/bin/tmux a || ${pkgs.tmux}/bin/tmux"
+
+        title = ""
+
+        macos-titlebar-style = hidden
+        window-decoration = false
       '';
 
     } // pkgs.lib.optionalAttrs pkgs.stdenv.isLinux {
