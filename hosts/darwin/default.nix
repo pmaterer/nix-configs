@@ -46,6 +46,7 @@
         start_service = true;
         restart_service = true;
       }
+      "llm"
     ];
     casks = [
       "alacritty"
