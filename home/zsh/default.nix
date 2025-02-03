@@ -94,6 +94,7 @@ in {
     gdc = "${git} diff --cached";
 
     gpt = ''${git} add . && ${git} commit -m "Testing" && ${git} push'';
+    gpf = ''${git} add . && ${git} commit -m "Fixes" && ${git} push'';
 
     # gitlab
     glopen = "${pkgs.glab}/bin/glab repo view -w";
