@@ -74,7 +74,7 @@
         };
     in {
       # $WORK
-      darwinConfigurations.Patricks-MacBook-Pro-2 = mkDarwinConfig {
+      darwinConfigurations.pmaterer-R6CQJ27009 = mkDarwinConfig {
         system = "aarch64-darwin";
         hostname = "Patricks-MacBook-Pro-2";
         email = "patrick.materer@socure.com";

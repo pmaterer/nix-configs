@@ -51,7 +51,7 @@
     casks = [
       "alacritty"
       "bitwarden"
-      "docker"
+      #"docker"
       "firefox"
       "maccy"
       "postgres-unofficial"

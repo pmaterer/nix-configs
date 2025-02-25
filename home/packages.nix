@@ -27,6 +27,10 @@
 
       oil
 
+      just
+
+      csvlens
+
       # etc
       imagemagick
       nerdfonts
