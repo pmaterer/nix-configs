@@ -26,12 +26,44 @@
       !git branch -D $1 && git push origin :$1
     '';
   };
+  # https://blog.gitbutler.com/how-git-core-devs-configure-git/
   extraConfig = {
+    column.ui = "auto";
+    branch.sort = "-commiterdate";
+    tag.sort = "version:refname";
+    init.defaultBranch = "main";
+    diff = {
+      algorithm = "histogram";
+      colorMoved = "plain";
+      mnemonicPrefix = true;
+      renames = true;
+    };
+    push = {
+      default = "simple";
+      autoSetupRemote = true;
+      followTags = true;
+    };
+    fetch = {
+      prune = true;
+      pruneTags = true;
+      all = true;
+    };
+    help.autocorrect = "prompt";
+    commit.verbose = true;
+    rerere = {
+      enabled = true;
+      autoupdate = true;
+    };
+
     core.editor = "vim";
-    fetch.prune = true;
+
+    rebase = {
+      autoSquash = true;
+      autoStash = true;
+      updateRefs = true;
+    };
+
     credential.helper = "store";
     color.ui = true;
-    push.autoSetupRemote = true;
-    init.defaultBranch = "main";
   };
 }

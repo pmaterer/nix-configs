@@ -72,7 +72,7 @@
       }
     ];
   userSettings = {
-    "editor.fontFamily" = "GohuFont 14 Nerd Font Mono";
+    "editor.fontFamily" = "Iosevka Nerd Font Mono";
     "editor.fontSize" = 14;
 
     "terminal.integrated.fontFamily" = "monospace";
