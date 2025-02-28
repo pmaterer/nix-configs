@@ -100,7 +100,7 @@
 
       # ai
       ollama
-      
+
     ] ++ (if pkgs.stdenv.isLinux then
       with pkgs; [
         terraform-docs

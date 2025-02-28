@@ -6,13 +6,13 @@ let
   autoCmd = import ./autocmd.nix;
   plugins = import ./plugins { inherit pkgs; };
   spaceduck = pkgs.vimUtils.buildVimPlugin {
-      name = "spaceduck";
-      src = pkgs.fetchFromGitHub {
-        owner = "pineapplegiant";
-        repo = "spaceduck";
-        rev = "main";
-        sha256 = "sha256-lE8y9BA2a4y0B6O3+NyOS7numoltmzhArgwTAner2fE=";
-      };
+    name = "spaceduck";
+    src = pkgs.fetchFromGitHub {
+      owner = "pineapplegiant";
+      repo = "spaceduck";
+      rev = "main";
+      sha256 = "sha256-lE8y9BA2a4y0B6O3+NyOS7numoltmzhArgwTAner2fE=";
+    };
   };
 in {
   inherit keymaps plugins autoCmd opts;

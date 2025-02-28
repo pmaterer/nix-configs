@@ -99,7 +99,8 @@ in {
     # gitlab
     glopen = "${pkgs.glab}/bin/glab repo view -w";
 
-    glm = "${pkgs.ollama}/bin/ollama run llama3 \"$(cat ~/.config/prompts/git-commit-message.txt) $(git diff)\"";
+    glm = ''
+      ${pkgs.ollama}/bin/ollama run llama3 "$(cat ~/.config/prompts/git-commit-message.txt) $(git diff)"'';
 
   };
 
