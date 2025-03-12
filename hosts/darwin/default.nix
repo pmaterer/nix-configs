@@ -47,6 +47,7 @@
         restart_service = true;
       }
       "llm"
+      "db-browser-for-sqlite"
     ];
     casks = [
       "alacritty"

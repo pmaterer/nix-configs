@@ -44,8 +44,6 @@
 
         background-opacity = 0.9
 
-        command = ${pkgs.zsh}/bin/zsh -l -c "${pkgs.tmux}/bin/tmux a || ${pkgs.tmux}/bin/tmux"
-
         title = ""
 
         macos-titlebar-style = hidden
