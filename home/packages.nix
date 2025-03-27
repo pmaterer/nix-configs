@@ -1,4 +1,8 @@
-{ pkgs, agenix, ... }: {
+{
+  pkgs,
+  agenix,
+  ...
+}: {
   home.packages = with pkgs;
     [
       # admin tools
@@ -25,7 +29,7 @@
 
       agenix.packages.${system}.default
 
-      oil
+      oils-for-unix
 
       just
 
@@ -100,34 +104,36 @@
 
       # ai
       ollama
+    ]
+    ++ (
+      if pkgs.stdenv.isLinux
+      then
+        with pkgs; [
+          terraform-docs
+          vagrant
+          spotify-player
+          iw
+          qemu
+          OVMF
+          libvirt
+          virt-viewer
+          virt-manager
+          pciutils
+          glxinfo
+          lshw
 
-    ] ++ (if pkgs.stdenv.isLinux then
-      with pkgs; [
-        terraform-docs
-        vagrant
-        spotify-player
-        iw
-        qemu
-        OVMF
-        libvirt
-        virt-viewer
-        virt-manager
-        pciutils
-        glxinfo
-        lshw
+          libxslt # for libvirt Terraform
 
-        libxslt # for libvirt Terraform
+          terraform
 
-        terraform
+          xclip
 
-        xclip
+          vlc
 
-        vlc
+          opendrop
 
-        opendrop
-
-        file
-      ]
-    else
-      [ ]);
+          file
+        ]
+      else []
+    );
 }

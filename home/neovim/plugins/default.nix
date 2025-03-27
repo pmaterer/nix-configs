@@ -1,4 +1,6 @@
-{ pkgs }: {
+{pkgs}: {
+  web-devicons.enable = true;
+
   nvim-autopairs.enable = true;
 
   nvim-colorizer = {
@@ -26,7 +28,7 @@
     enable = true;
     findPackage = pkgs.ripgrep;
     replacePackage = pkgs.gnused;
-    settings = { replace = { cmd = "${pkgs.gnused}/bin/sed"; }; };
+    settings = {replace = {cmd = "${pkgs.gnused}/bin/sed";};};
   };
 
   lualine.enable = true;
@@ -46,7 +48,7 @@
       "<C-f>" = "live_grep";
     };
     settings.defaults = {
-      file_ignore_patterns = [ "^.git/" ];
+      file_ignore_patterns = ["^.git/"];
       set_env.COLORTERM = "truecolor";
     };
   };
@@ -75,19 +77,19 @@
   lsp = {
     enable = true;
     servers = {
-      bashls = { enable = true; };
-      docker-compose-language-service = { enable = true; };
-      dockerls = { enable = true; };
-      eslint = { enable = true; };
-      gopls = { enable = true; };
-      helm-ls = { enable = true; };
-      html = { enable = true; };
-      lua-ls = { enable = true; };
-      nixd = { enable = true; };
-      pylsp = { enable = true; };
-      tsserver = { enable = true; };
-      terraformls = { enable = true; };
-      yamlls = { enable = true; };
+      bashls = {enable = true;};
+      docker_compose_language_service = {enable = true;};
+      dockerls = {enable = true;};
+      eslint = {enable = true;};
+      gopls = {enable = true;};
+      helm_ls = {enable = true;};
+      html = {enable = true;};
+      lua_ls = {enable = true;};
+      nixd = {enable = true;};
+      pylsp = {enable = true;};
+      ts_ls = {enable = true;};
+      terraformls = {enable = true;};
+      yamlls = {enable = true;};
     };
     keymaps = {
       silent = true;
@@ -112,8 +114,8 @@
     enable = true;
     settings = {
       autoEnableSources = true;
-      experimental = { ghost_text = true; };
-      sources = map (name: { inherit name; }) [
+      experimental = {ghost_text = true;};
+      sources = map (name: {inherit name;}) [
         "nvim_lsp"
         "nvim_lua"
         "git"
@@ -132,8 +134,7 @@
         "<C-f>" = "cmp.mapping.scroll_docs(4)";
         "<C-d>" = "cmp.mapping.scroll_docs(-4)";
       };
-      snippet.expand =
-        "function(args) require('luasnip').lsp_expand(args.body) end";
+      snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
     };
   };
   luasnip.enable = true;
@@ -141,4 +142,6 @@
 
   lint.enable = true;
   conform-nvim.enable = true;
+
+  which-key.enable = true;
 }

@@ -172,8 +172,7 @@ in [
   }
   {
     key = "<leader>sw";
-    action =
-      ''<cmd>lua require("spectre").open_visual({select_word=true})<cr>'';
+    action = ''<cmd>lua require("spectre").open_visual({select_word=true})<cr>'';
     options = defaultOptions;
   }
   {

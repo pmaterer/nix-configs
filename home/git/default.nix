@@ -1,16 +1,19 @@
-{ pkgs, defaultEmail, ... }: {
+{
+  pkgs,
+  defaultEmail,
+  ...
+}: {
   enable = true;
   package = pkgs.gitAndTools.gitFull;
   userName = "Patrick Materer";
   userEmail = defaultEmail;
-  ignores = [ "scratch.txt" ".terraform/" ".DS_Store" ".envrc" ];
+  ignores = ["scratch.txt" ".terraform/" ".DS_Store" ".envrc"];
   aliases = {
     s = "status";
     co = "checkout";
     cob = "checkout -b";
     del = "branch -D";
-    br =
-      "branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
+    br = "branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
     undo = "reset HEAD~1 --mixed";
 
     tags = "ls-remote --tags origin";
@@ -29,7 +32,7 @@
   # https://blog.gitbutler.com/how-git-core-devs-configure-git/
   extraConfig = {
     column.ui = "auto";
-    branch.sort = "-commiterdate";
+    branch.sort = "-committerdate";
     tag.sort = "version:refname";
     init.defaultBranch = "main";
     diff = {

@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   enable = true;
   aggressiveResize = true;
   baseIndex = 1;
@@ -8,7 +8,7 @@
   shortcut = "C-f";
   historyLimit = 50000;
   sensibleOnTop = false;
-  plugins = with pkgs; [{ plugin = tmuxPlugins.yank; }];
+  plugins = with pkgs; [{plugin = tmuxPlugins.yank;}];
 
   extraConfig = ''
     set -g renumber-windows on

@@ -1,9 +1,9 @@
-{ pkgs, ... }: {
-  services = { nix-daemon.enable = true; };
+{pkgs, ...}: {
+  services = {nix-daemon.enable = true;};
 
   security.pam.enableSudoTouchIdAuth = true;
 
-  environment.shells = with pkgs; [ bash zsh ];
+  environment.shells = with pkgs; [bash zsh];
   # Creates /etc/zshrc that load the nix-darwin environment
   programs.zsh.enable = true;
 
@@ -12,7 +12,7 @@
   nix = {
     settings = {
       experimental-features = "nix-command flakes";
-      trusted-users = [ "root" "pmaterer" ];
+      trusted-users = ["root" "pmaterer"];
     };
     gc = {
       automatic = true;
@@ -29,7 +29,7 @@
       cleanup = "uninstall";
     };
 
-    taps = [ "ggpeti/rmrec" "homebrew/services" "int128/kubelogin" ];
+    taps = ["ggpeti/rmrec" "homebrew/services" "int128/kubelogin"];
     brews = [
       "oidc-kubelogin"
       "terraform-docs"
@@ -47,7 +47,6 @@
         restart_service = true;
       }
       "llm"
-      "db-browser-for-sqlite"
     ];
     casks = [
       "alacritty"
@@ -67,6 +66,8 @@
       "gimp"
       "wezterm"
       "ghostty"
+      "raycast"
+      "flashspace"
     ];
   };
 
