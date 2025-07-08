@@ -1,8 +1,5 @@
-{
-  pkgs,
-  config,
-  ...
-}: let
+{ pkgs, config, ... }:
+let
   git = "${pkgs.git}/bin/git";
   asdfShare = "${pkgs.asdf-vm}/share";
 in {
@@ -18,43 +15,38 @@ in {
   history.size = 10000;
   history.path = "${config.xdg.dataHome}/zsh/history";
 
-  initExtra =
-    ''
-      zmodload zsh/zprof
+  initExtra = ''
+    zmodload zsh/zprof
 
-      source ${config.age.secrets.environment.path}
+    source ${config.age.secrets.environment.path}
 
-      source <(kubectl completion zsh)
+    source <(kubectl completion zsh)
 
-      . "${asdfShare}/asdf-vm/asdf.sh"
-      . "${asdfShare}/asdf-vm/completions/asdf.bash"
+    . "${asdfShare}/asdf-vm/asdf.sh"
+    . "${asdfShare}/asdf-vm/completions/asdf.bash"
 
-      export PATH=$PATH:~/.npm/bin
-      export PATH="$HOME/.krew/bin:$PATH"
-      export PATH="$HOME/bin:$PATH"
-      export PATH="$HOME/.local/bin.go:$PATH"
-      export PATH="$HOME/nonix-bin:$PATH"
+    export PATH=$PATH:~/.npm/bin
+    export PATH="$HOME/.krew/bin:$PATH"
+    export PATH="$HOME/bin:$PATH"
+    export PATH="$HOME/.local/bin.go:$PATH"
+    export PATH="$HOME/nonix-bin:$PATH"
 
-      export PYENV_ROOT="$HOME/.pyenv"
-      [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-      eval "$(pyenv init -)"
-      [[ -f $PYENV_ROOT/plugins/pyenv-virtualenv ]] && eval "$(pyenv virtualenv-init -)"
+    export PYENV_ROOT="$HOME/.pyenv"
+    [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+    [[ -f $PYENV_ROOT/plugins/pyenv-virtualenv ]] && eval "$(pyenv virtualenv-init -)"
 
-      eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"
+    eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"
 
-      timezsh() {
-        shell="${pkgs.zsh}/bin/zsh"
-        for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
-      }
+    timezsh() {
+      shell="${pkgs.zsh}/bin/zsh"
+      for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+    }
 
-    ''
-    + (
-      if pkgs.stdenv.isLinux
-      then ''
-        export OVMF_PATH="${pkgs.OVMF.fd}/FV"
-      ''
-      else ""
-    );
+  '' + (if pkgs.stdenv.isLinux then ''
+    export OVMF_PATH="${pkgs.OVMF.fd}/FV"
+  '' else
+    "");
 
   shellAliases = {
     switch = "darwin-rebuild switch --flake ~/.config/nix";
@@ -74,7 +66,8 @@ in {
     netshoot = "k run tmp-shell --rm -i --tty --image nicolaka/netshoot";
     kill-pod = "k delete pod --force --grace-period=0";
 
-    k-pods-count = "${pkgs.kubectl}/bin/kubectl get pods --all-namespaces -o json | jq -r '.items | group_by(.metadata.namespace) | map({\"namespace\": .[0].metadata.namespace, \"running_pods\": map(select(.status.phase == \"Running\")) | length}) | sort_by(.namespace) | .[] | \"(.namespace): (.running_pods)\"'";
+    k-pods-count =
+      "${pkgs.kubectl}/bin/kubectl get pods --all-namespaces -o json | jq -r '.items | group_by(.metadata.namespace) | map({\"namespace\": .[0].metadata.namespace, \"running_pods\": map(select(.status.phase == \"Running\")) | length}) | sort_by(.namespace) | .[] | \"(.namespace): (.running_pods)\"'";
 
     ctar = "${pkgs.gnutar}/bin/tar -czvf";
     otar = "${pkgs.gnutar}/bin/tar -xcf";
@@ -89,6 +82,7 @@ in {
     tfp = "terraform plan";
     tfa = "terraform apply";
     tfaa = "terraform apply -auto-approve";
+    tft = "terraform test";
     tfc = "terraform-docs . && terraform fmt && tflint";
 
     spt = "spotify_player";
@@ -102,7 +96,8 @@ in {
     ga = "${git} add .";
     gap = "${git} add -p";
 
-    gb = "${git} branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
+    gb =
+      "${git} branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
 
     gdc = "${git} diff --cached";
 
@@ -123,7 +118,8 @@ in {
 
     AWS_PAGER = "";
     AWS_CA_BUNDLE = config.age.secrets.certs.path;
-    NODE_EXTRA_CA_CERTS = config.age.secrets.certs.path;
+    #NODE_EXTRA_CA_CERTS = config.age.secrets.certs.path;
+    NODE_EXTRA_CA_CERTS = "~/.certs";
     AWS_DEFAULT_REGION = "us-east-1";
   };
 }
