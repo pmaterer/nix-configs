@@ -24,6 +24,7 @@ in {
 
     . "${asdfShare}/asdf-vm/asdf.sh"
     . "${asdfShare}/asdf-vm/completions/asdf.bash"
+    [[ -d "$HOME/.asdf/plugins/java" ]] && . ~/.asdf/plugins/java/set-java-home.zsh
 
     export PATH=$PATH:~/.npm/bin
     export PATH="$HOME/.krew/bin:$PATH"
