@@ -1,9 +1,10 @@
 # https://nix-community.github.io/nixvim/
-{pkgs}: let
+{ pkgs }:
+let
   opts = import ./opts.nix;
   keymaps = import ./keymaps.nix;
   autoCmd = import ./autocmd.nix;
-  plugins = import ./plugins {inherit pkgs;};
+  plugins = import ./plugins { inherit pkgs; };
   spaceduck = pkgs.vimUtils.buildVimPlugin {
     name = "spaceduck";
     src = pkgs.fetchFromGitHub {
@@ -23,10 +24,8 @@ in {
   globals.mapleader = ",";
   clipboard.register = "unnamedplus";
 
-  extraPlugins = [spaceduck];
-
+  extraPlugins = [ spaceduck ];
   colorscheme = "spaceduck";
-  #colorschemes = { melange.enable = true; };
 
-  extraPackages = with pkgs; [gnused];
+  extraPackages = with pkgs; [ gnused ];
 }

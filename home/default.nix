@@ -1,18 +1,32 @@
 { pkgs, config, nixvim, defaultEmail, ... }: {
   imports = [ ./packages.nix nixvim.homeManagerModules.nixvim ];
 
+  catppuccin = {
+    enable = true;
+    flavor = "macchiato";
+  };
+
   # secrets
   age = {
     identityPaths = [ "${config.home.homeDirectory}/.ssh/nix-configs" ];
-    secrets.environment.file = ../secrets/environment.age;
-    secrets.certs.file = ../secrets/certs.age;
-    secrets.tailscale.file = ../secrets/tailscale.age;
+    secrets = {
+      environment.file = ../secrets/environment.age;
+      certs.file = ../secrets/certs.age;
+      tailscale.file = ../secrets/tailscale.age;
+      spotify.file = ../secrets/spotify.age;
+    };
   };
 
   home = {
-    stateVersion = "23.05";
+    stateVersion = "24.11";
     preferXdgDirectories = true;
     sessionVariables = { NIX_MANAGED = "true"; };
+
+    file.".grc" = {
+      enable = true;
+      source = ./grc;
+      recursive = true;
+    };
 
     file.".npmrc".text = ''
       prefix=~/.npm
@@ -22,6 +36,24 @@
       source = ./bin;
       target = "${config.home.homeDirectory}/bin";
     };
+
+    file.".direnvrc" = {
+      text = ''
+        set_git_author() {
+          local email="$1" name="$2"
+
+          if [[ -z "$email" ]] || [[ -z "$name" ]]; then
+            >&2 echo "Couldn't set git author!"
+            return 1
+          fi
+
+          export GIT_COMMITTER_NAME="$name"
+          export GIT_COMMITTER_EMAIL="$email"
+          export GIT_AUTHOR_NAME="$name"
+          export GIT_AUTHOR_EMAIL="$email"
+        }
+      '';
+    };
   };
 
   xdg = {
@@ -29,7 +61,7 @@
 
     configFile = {
       "spotify-player/app.toml".text = ''
-        client_id = "3294e1e273f442519e5abf3b7bafed99"
+        client_id_file = "${config.age.secrets.spotify.path}"
       '';
       "alacritty/theme.toml".source = ./alacritty/melange_dark.toml;
       "ghostty/config".text = ''
@@ -121,6 +153,5 @@
     };
     #pyenv.enable = true;
     fd = { enable = true; };
-
   };
 }

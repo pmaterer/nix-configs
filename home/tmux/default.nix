@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   enable = true;
   aggressiveResize = true;
   baseIndex = 1;
@@ -8,9 +8,20 @@
   shortcut = "C-f";
   historyLimit = 50000;
   sensibleOnTop = false;
-  plugins = with pkgs; [{plugin = tmuxPlugins.yank;}];
+  plugins = with pkgs.tmuxPlugins; [
+    yank
+    resurrect
+    continuum
+    { plugin = vim-tmux-navigator; }
+    { plugin = tmux-fzf; }
+  ];
 
   extraConfig = ''
+    ${if pkgs.stdenv.isDarwin then ''
+      set -g default-command "reattach-to-user-namespace -l zsh"
+    '' else
+      ""}
+
     set -g renumber-windows on
     set -g allow-rename off
     set -gw word-separators ' @"=()[]_-:,.'
@@ -40,9 +51,15 @@
 
     setw -g mode-keys vi
     bind -T copy-mode-vi v send -X begin-selection
-    bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
     bind P paste-buffer
-    bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "pbcopy"
+    ${if pkgs.stdenv.isDarwin then ''
+      bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
+    '' else ''
+      bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -selection clipboard"
+    ''}
+    bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "${
+      if pkgs.stdenv.isDarwin then "pbcopy" else "xclip -selection clipboard"
+    }"
 
     #set-option -g default-command "reattach-to-user-namespace -l $SHELL"
 
@@ -77,5 +94,11 @@
 
     # When commands are run
     set -g message-style "fg=#0f111b,bg=#686f9a"
+
+    set -g @continuum-restore 'on'
+    set -g @continuum-save-interval '15'
+
+    set -g @resurrect-capture-pane-contents 'on'
+    set -g @resurrect-strategy-nvim 'session'
   '';
 }

@@ -57,6 +57,10 @@
       "sketchybar"
       "bun"
       "kind"
+      "reattach-to-user-namespace"
+      "grc"
+      "aws-sso-cli"
+      "kubeconform"
     ];
     casks = [
       "alacritty"
@@ -101,9 +105,16 @@
       };
 
       NSGlobalDomain = {
+        # Performance improvements
+        NSWindowResizeTime = 1.0e-3;
+        NSNavPanelExpandedStateForSaveMode = true;
+        NSNavPanelExpandedStateForSaveMode2 = true;
+        PMPrintingExpandedStateForPrint = true;
+
         AppleInterfaceStyle = "Dark";
         _HIHideMenuBar = true;
 
+        # Disable automatic text replacements
         NSAutomaticCapitalizationEnabled = false;
         NSAutomaticDashSubstitutionEnabled = false;
         NSAutomaticPeriodSubstitutionEnabled = false;
@@ -113,12 +124,23 @@
         AppleShowAllExtensions = true;
         AppleShowScrollBars = "Always";
 
+        ApplePressAndHoldEnabled = false;
         KeyRepeat = 1;
         InitialKeyRepeat = 14;
+
+        NSAutomaticWindowAnimationsEnabled = false;
+      };
+
+      trackpad = {
+        Clicking = true;
+        TrackpadThreeFingerDrag = true;
       };
 
       screencapture.location = "${builtins.getEnv "HOME"}/screenshots";
       finder = {
+        ShowPathbar = true;
+        ShowStatusBar = true;
+        FXDefaultSearchScope = "SCcf";
         AppleShowAllExtensions = true;
         QuitMenuItem = true;
         _FXShowPosixPathInTitle = true;
@@ -130,5 +152,5 @@
       remapCapsLockToEscape = true;
     };
   };
-#
+  #
 }

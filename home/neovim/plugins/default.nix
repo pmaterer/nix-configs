@@ -1,4 +1,4 @@
-{pkgs}: {
+{ pkgs }: {
   web-devicons.enable = true;
 
   nvim-autopairs.enable = true;
@@ -28,7 +28,7 @@
     enable = true;
     findPackage = pkgs.ripgrep;
     replacePackage = pkgs.gnused;
-    settings = {replace = {cmd = "${pkgs.gnused}/bin/sed";};};
+    settings = { replace = { cmd = "${pkgs.gnused}/bin/sed"; }; };
   };
 
   lualine.enable = true;
@@ -48,7 +48,7 @@
       "<C-f>" = "live_grep";
     };
     settings.defaults = {
-      file_ignore_patterns = ["^.git/"];
+      file_ignore_patterns = [ "^.git/" ];
       set_env.COLORTERM = "truecolor";
     };
   };
@@ -65,7 +65,23 @@
       toml
       xml
       yaml
+      go
+      typescript
+      tsx
+      javascript
+      lua
+      python
+      dockerfile
+      hcl
+      terraform
+      vim
+      vimdoc
     ];
+    settings = {
+      highlight.enable = true;
+      indent.enable = true;
+      incremental_selection.enable = true;
+    };
   };
 
   # LSP
@@ -77,19 +93,23 @@
   lsp = {
     enable = true;
     servers = {
-      bashls = {enable = true;};
-      docker_compose_language_service = {enable = true;};
-      dockerls = {enable = true;};
-      eslint = {enable = true;};
-      gopls = {enable = true;};
-      helm_ls = {enable = true;};
-      html = {enable = true;};
-      lua_ls = {enable = true;};
-      nixd = {enable = true;};
-      pylsp = {enable = true;};
-      ts_ls = {enable = true;};
-      terraformls = {enable = true;};
-      yamlls = {enable = true;};
+      bashls = { enable = true; };
+      docker_compose_language_service = { enable = true; };
+      dockerls = { enable = true; };
+      eslint = { enable = true; };
+      gopls = { enable = true; };
+      helm_ls = { enable = true; };
+      html = { enable = true; };
+      lua_ls = { enable = true; };
+      nixd = { enable = true; };
+      pylsp = { enable = true; };
+      ts_ls = { enable = true; };
+      terraformls = { enable = true; };
+      yamlls = { enable = true; };
+      jsonls = { enable = true; };
+      marksman = { enable = true; }; # markdown
+      taplo = { enable = true; }; # toml
+      rust_analyzer = { enable = true; }; # rust
     };
     keymaps = {
       silent = true;
@@ -114,8 +134,8 @@
     enable = true;
     settings = {
       autoEnableSources = true;
-      experimental = {ghost_text = true;};
-      sources = map (name: {inherit name;}) [
+      experimental = { ghost_text = true; };
+      sources = map (name: { inherit name; }) [
         "nvim_lsp"
         "nvim_lua"
         "git"
@@ -134,14 +154,32 @@
         "<C-f>" = "cmp.mapping.scroll_docs(4)";
         "<C-d>" = "cmp.mapping.scroll_docs(-4)";
       };
-      snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
+      snippet.expand =
+        "function(args) require('luasnip').lsp_expand(args.body) end";
     };
   };
   luasnip.enable = true;
   friendly-snippets.enable = true;
 
   lint.enable = true;
-  conform-nvim.enable = true;
+  conform-nvim = {
+    enable = true;
+    settings = {
+      formatters_by_ft = {
+        nix = [ "nixfmt" ];
+        lua = [ "stylua" ];
+        python = [ "black" ];
+        javascript = [ "prettier" ];
+        typescript = [ "prettier" ];
+        go = [ "gofmt" "goimports" ];
+        terraform = [ "terraform_fmt" ];
+      };
+      format_on_save = {
+        timeout = 500;
+        lsp_fallback = true;
+      };
+    };
+  };
 
   which-key.enable = true;
 }

@@ -16,32 +16,49 @@ in {
   history.path = "${config.xdg.dataHome}/zsh/history";
 
   initExtra = ''
-    zmodload zsh/zprof
+    # Speed up compinit by only checking once a day
+    autoload -Uz compinit
+    if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+      compinit
+    else
+      compinit -C
+    fi
 
+    # Consolidated PATH management
+    export PYENV_ROOT="$HOME/.pyenv"
+    typeset -U path
+    path=(
+      "$HOME/bin"
+      "$HOME/.local/bin.go"
+      "$HOME/.npm/bin"
+      "$HOME/.krew/bin"
+      "$HOME/nonix-bin"
+      "$PYENV_ROOT/bin"(N)
+      $path
+    )
+
+    # Source secrets
     source ${config.age.secrets.environment.path}
 
-    source <(kubectl completion zsh)
-
+    # ASDF setup
     . "${asdfShare}/asdf-vm/asdf.sh"
-    . "${asdfShare}/asdf-vm/completions/asdf.bash"
+    fpath=(${asdfShare}/asdf-vm/completions $fpath)
     [[ -d "$HOME/.asdf/plugins/java" ]] && . ~/.asdf/plugins/java/set-java-home.zsh
 
-    export PATH=$PATH:~/.npm/bin
-    export PATH="$HOME/.krew/bin:$PATH"
-    export PATH="$HOME/bin:$PATH"
-    export PATH="$HOME/.local/bin.go:$PATH"
-    export PATH="$HOME/nonix-bin:$PATH"
-
-    export PYENV_ROOT="$HOME/.pyenv"
-    [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-    [[ -f $PYENV_ROOT/plugins/pyenv-virtualenv ]] && eval "$(pyenv virtualenv-init -)"
-
+    # Fast tools - load immediately
     eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"
+    eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
 
-    timezsh() {
-      shell="${pkgs.zsh}/bin/zsh"
-      for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+    # Deferred completions (loads in background after prompt appears)
+    zsh-defer -c 'source <(${pkgs.kubectl}/bin/kubectl completion zsh)'
+
+    # Lazy load pyenv (only when called)
+    pyenv() {
+      unfunction pyenv
+      eval "$(command pyenv init -)"
+      [[ -f $PYENV_ROOT/plugins/pyenv-virtualenv/bin/pyenv-virtualenv-init ]] && \
+        eval "$(command pyenv virtualenv-init -)"
+      pyenv "$@"
     }
 
   '' + (if pkgs.stdenv.isLinux then ''
@@ -50,6 +67,10 @@ in {
     "");
 
   shellAliases = {
+    ls = "${pkgs.eza}/bin/eza --icons --git";
+    ll = "${pkgs.eza}/bin/eza -la --icons --git";
+    tree = "${pkgs.eza}/bin/eza --tree --icons";
+
     switch = "darwin-rebuild switch --flake ~/.config/nix";
 
     diff = "${pkgs.colordiff}/bin/colordiff";
@@ -105,6 +126,9 @@ in {
     gpt = ''${git} add . && ${git} commit -m "Testing" && ${git} push'';
     gpf = ''${git} add . && ${git} commit -m "Fixes" && ${git} push'';
 
+    gph = "${git} push";
+    gpu = "${git} pull";
+
     # gitlab
     glopen = "${pkgs.glab}/bin/glab repo view -w";
 
@@ -119,8 +143,20 @@ in {
 
     AWS_PAGER = "";
     AWS_CA_BUNDLE = config.age.secrets.certs.path;
+    REQUESTS_CA_BUNDLE = config.age.secrets.certs.path;
+    SSL_CERT_FILE = config.age.secrets.certs.path;
     #NODE_EXTRA_CA_CERTS = config.age.secrets.certs.path;
     NODE_EXTRA_CA_CERTS = "~/.certs";
     AWS_DEFAULT_REGION = "us-east-1";
   };
+
+  plugins = [{
+    name = "zsh-defer";
+    src = pkgs.fetchFromGitHub {
+      owner = "romkatv";
+      repo = "zsh-defer";
+      rev = "master";
+      sha256 = "sha256-MFlvAnPCknSgkW3RFA8pfxMZZS/JbyF3aMsJj9uHHVU=";
+    };
+  }];
 }

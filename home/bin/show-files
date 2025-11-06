@@ -8,9 +8,9 @@ def load_gitignore_patterns(directory):
     # Some common things we can safely ignore
     patterns = [
         '.git', '.gitignore',
-        '*.lock', 
+        '*.lock',
         '.vscode'
-    ] 
+    ]
     if os.path.exists(gitignore_path):
         with open(gitignore_path, 'r') as gitignore_file:
             for line in gitignore_file:
@@ -29,7 +29,7 @@ def walk_directory(directory, patterns):
     for root, dirs, files in os.walk(directory):
         # Filter out ignored directories
         dirs[:] = [d for d in dirs if not should_ignore(os.path.join(root, d), patterns)]
-        
+
         for file in files:
             file_path = os.path.join(root, file)
             if not should_ignore(file_path, patterns):
@@ -46,16 +46,16 @@ def walk_directory(directory, patterns):
 def main():
     parser = argparse.ArgumentParser(description="Recursively print files and their contents.")
     parser.add_argument(
-        "--ignore", 
-        action="append", 
-        default=[], 
+        "--ignore",
+        action="append",
+        default=[],
         help="Ignore files or directories matching the pattern. Can be passed multiple times."
     )
     args = parser.parse_args()
 
     directory = '.'
     gitignore_patterns = load_gitignore_patterns(directory)
-    
+
     # Add user-specified patterns to gitignore patterns
     all_patterns = gitignore_patterns + args.ignore
 

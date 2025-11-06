@@ -1,4 +1,4 @@
-{ pkgs, agenix, ... }: {
+{ pkgs, agenix, system, ... }: {
   home.packages = with pkgs;
     [
       # admin tools
@@ -77,7 +77,6 @@
       packer
 
       # cloud
-      aws-sso-cli
       awscli
 
       # k8s

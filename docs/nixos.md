@@ -22,11 +22,6 @@ sudo dhcpcd
 ping -c 3 google.com
 ```
 
-
-
-
-
-
 ```
 nix-shell -p git
 git clone https://github.com/pmaterer/nix-configs.git
@@ -38,19 +33,6 @@ sudo nix --experimental-features "nix-command flakes" run github:nix-community/d
 
 sudo nixos-install --flake .#letterkenny
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Now set the root user password:
 
@@ -64,20 +46,6 @@ From another machine, with Nix installed:
 ```sh
 nix run github:nix-community/nixos-anywhere -- --build-on-remote --flake '.#letterkenny' root@<ip addr>
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Install using `disko`:
 
