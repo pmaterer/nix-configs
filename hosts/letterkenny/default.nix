@@ -1,6 +1,10 @@
-{ pkgs, config, lib, ... }: {
-  imports =
-    [ ./hardware-configuration.nix ./libvirt.nix ./disks.nix ./tailscale.nix ];
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: {
+  imports = [./hardware-configuration.nix ./libvirt.nix ./disks.nix ./tailscale.nix];
 
   boot = {
     loader = {
@@ -11,7 +15,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   networking = {
     hostName = "letterkenny";
@@ -23,12 +27,12 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   age = {
-    identityPaths = [ "/home/pmaterer/.ssh/nix-configs" ];
+    identityPaths = ["/home/pmaterer/.ssh/nix-configs"];
     secrets.tailscale.file = ../../secrets/tailscale.age;
   };
 
   services = {
-    displayManager = { defaultSession = "plasma"; };
+    displayManager = {defaultSession = "plasma";};
 
     xserver = {
       enable = true;
@@ -37,34 +41,34 @@
         options = "caps:escape";
       };
 
-      displayManager = { lightdm.enable = true; };
+      displayManager = {lightdm.enable = true;};
 
       desktopManager = {
         plasma5.enable = true;
         enlightenment.enable = true;
       };
 
-      videoDrivers = [ "nvidia" ];
+      videoDrivers = ["nvidia"];
     };
     libinput.enable = true;
     openssh.enable = true;
     ntp.enable = true;
     blueman.enable = true;
-    tailscale = { enable = true; };
+    tailscale = {enable = true;};
   };
 
   programs = {
     zsh.enable = true;
     nix-ld = {
       enable = true;
-      libraries = with pkgs; [ libgcc glibc ];
+      libraries = with pkgs; [libgcc glibc];
     };
   };
 
   users.users.pmaterer = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
-    packages = with pkgs; [ firefox bitwarden-desktop ];
+    extraGroups = ["wheel" "networkmanager" "libvirtd" "docker"];
+    packages = with pkgs; [firefox bitwarden-desktop];
     shell = pkgs.zsh;
   };
 
@@ -72,7 +76,7 @@
     docker.enable = true;
     virtualbox.host.enable = true;
   };
-  users.extraGroups.vboxusers.members = [ "pmaterer" ];
+  users.extraGroups.vboxusers.members = ["pmaterer"];
 
   system.stateVersion = "24.11";
 }

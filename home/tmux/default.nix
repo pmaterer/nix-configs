@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   enable = true;
   aggressiveResize = true;
   baseIndex = 1;
@@ -12,15 +12,18 @@
     yank
     resurrect
     continuum
-    { plugin = vim-tmux-navigator; }
-    { plugin = tmux-fzf; }
+    {plugin = vim-tmux-navigator;}
+    {plugin = tmux-fzf;}
   ];
 
   extraConfig = ''
-    ${if pkgs.stdenv.isDarwin then ''
-      set -g default-command "reattach-to-user-namespace -l zsh"
-    '' else
-      ""}
+    ${
+      if pkgs.stdenv.isDarwin
+      then ''
+        set -g default-command "reattach-to-user-namespace -l zsh"
+      ''
+      else ""
+    }
 
     set -g renumber-windows on
     set -g allow-rename off
@@ -52,13 +55,19 @@
     setw -g mode-keys vi
     bind -T copy-mode-vi v send -X begin-selection
     bind P paste-buffer
-    ${if pkgs.stdenv.isDarwin then ''
-      bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
-    '' else ''
-      bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -selection clipboard"
-    ''}
+    ${
+      if pkgs.stdenv.isDarwin
+      then ''
+        bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
+      ''
+      else ''
+        bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -selection clipboard"
+      ''
+    }
     bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "${
-      if pkgs.stdenv.isDarwin then "pbcopy" else "xclip -selection clipboard"
+      if pkgs.stdenv.isDarwin
+      then "pbcopy"
+      else "xclip -selection clipboard"
     }"
 
     #set-option -g default-command "reattach-to-user-namespace -l $SHELL"

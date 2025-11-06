@@ -26,12 +26,13 @@ lint:
 check:
 	@nix run "github:DeterminateSystems/flake-checker"
 
-.PHONY: validate
-validate:
-	@make fmt
-	@make lint
-	@make check
-
 .PHONY: alejandra
 alejandra:
 	@nix run github:kamadorueda/alejandra/3.0.0 .
+
+.PHONY: all 
+all:
+	@make fmt
+	@make lint
+	@make check
+	@make alejandra

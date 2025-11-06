@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   # https://nixos.wiki/wiki/Libvirt
   virtualisation.libvirtd = {
     enable = true;
@@ -12,7 +12,8 @@
           (pkgs.OVMF.override {
             secureBoot = true;
             tpmSupport = true;
-          }).fd
+          })
+          .fd
         ];
       };
     };

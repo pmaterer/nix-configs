@@ -1,5 +1,5 @@
 # Common utility functions
-{ nixpkgs }: {
+{nixpkgs}: {
   # Helper to get system packages
   getSystemPackages = system: nixpkgs.legacyPackages.${system};
 
@@ -11,10 +11,9 @@
 
   # Helper to conditionally include modules based on system
   forSystem = system: darwinModules: linuxModules:
-    if (nixpkgs.lib.hasSuffix "darwin" system) then
-      darwinModules
-    else
-      linuxModules;
+    if (nixpkgs.lib.hasSuffix "darwin" system)
+    then darwinModules
+    else linuxModules;
 
   # Helper to merge configurations
   mergeConfigs = configs: nixpkgs.lib.mkMerge configs;

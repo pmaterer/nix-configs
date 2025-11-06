@@ -1,6 +1,15 @@
 # Library functions for the Nix configuration
-{ nixpkgs, nix-darwin, home-manager, nixvim, agenix, disko, ghostty, hosts
-, catppuccin, }: {
+{
+  nixpkgs,
+  nix-darwin,
+  home-manager,
+  nixvim,
+  agenix,
+  disko,
+  ghostty,
+  hosts,
+  catppuccin,
+}: {
   # Darwin system configuration builder
   mkDarwinConfig = import ./mkDarwinConfig.nix {
     inherit nixpkgs nix-darwin home-manager nixvim agenix catppuccin;
@@ -12,5 +21,5 @@
   };
 
   # Common utilities
-  utils = import ./utils.nix { inherit nixpkgs; };
+  utils = import ./utils.nix {inherit nixpkgs;};
 }

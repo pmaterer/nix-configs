@@ -1,5 +1,5 @@
 # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.vscode.enable
-{ pkgs, ... }: {
+{pkgs, ...}: {
   enable = true;
   extensions = with pkgs.vscode-extensions;
     [
@@ -20,7 +20,8 @@
       jdinhlife.gruvbox
       denoland.vscode-deno
       #      ms-vscode-remote.vscode-remote-extensionpack
-    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    ]
+    ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       # use pkgs.lib.fakeSha256 to get sha256
       {
         name = "vscode-openapi";
@@ -87,8 +88,8 @@
     "explorer.confirmDelete" = false;
     "nix.formatterPath" = "${pkgs.nixfmt-classic}/bin/nixfmt";
 
-    "[nix]" = { "editor.defaultFormatter" = "jnoortheen.nix-ide"; };
-    "[json]" = { "editor.defaultFormatter" = "vscode.json-language-features"; };
-    "[typescript]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
+    "[nix]" = {"editor.defaultFormatter" = "jnoortheen.nix-ide";};
+    "[json]" = {"editor.defaultFormatter" = "vscode.json-language-features";};
+    "[typescript]" = {"editor.defaultFormatter" = "esbenp.prettier-vscode";};
   };
 }

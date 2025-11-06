@@ -1,18 +1,23 @@
-{ config, lib, pkgs, modulesPath, ... }: {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}: {
+  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
   # https://thinkstation-specs.com/thinkpad/p1-gen-1/
 
   boot = {
-    initrd.availableKernelModules =
-      [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
-    initrd.kernelModules = [ ];
-    kernelModules = [ "kvm-intel" ];
+    initrd.availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod"];
+    initrd.kernelModules = [];
+    kernelModules = ["kvm-intel"];
     # https://github.com/NixOS/nixos-hardware/blob/master/lenovo/thinkpad/p1/default.nix
     # Need to set Thunderbolt to "BIOS Assist Mode"
     # https://forums.lenovo.com/t5/Other-Linux-Discussions/T480-CPU-temperature-and-fan-speed-under-linux/m-p/4114832
-    kernelParams = [ "acpi_backlight=native" ];
-    extraModulePackages = [ ];
+    kernelParams = ["acpi_backlight=native"];
+    extraModulePackages = [];
   };
 
   hardware = {
@@ -48,7 +53,7 @@
   #   options = [ "fmask=0077" "dmask=0077" ];
   # };
 
-  swapDevices = [ ];
+  swapDevices = [];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

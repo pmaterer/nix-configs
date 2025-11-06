@@ -1,6 +1,18 @@
 # NixOS system configuration builder
-{ nixpkgs, home-manager, nixvim, agenix, disko, ghostty, hosts, }:
-{ system, hostname, email, username, }:
+{
+  nixpkgs,
+  home-manager,
+  nixvim,
+  agenix,
+  disko,
+  ghostty,
+  hosts,
+}: {
+  system,
+  hostname,
+  email,
+  username,
+}:
 nixpkgs.lib.nixosSystem {
   inherit system;
   modules = [
@@ -23,8 +35,8 @@ nixpkgs.lib.nixosSystem {
       };
     }
     hosts.nixosModule
-    { networking.stevenBlackHosts.enable = true; }
+    {networking.stevenBlackHosts.enable = true;}
     disko.nixosModules.disko
-    { environment.systemPackages = [ ghostty.packages.${system}.default ]; }
+    {environment.systemPackages = [ghostty.packages.${system}.default];}
   ];
 }
