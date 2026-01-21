@@ -1,8 +1,5 @@
-{
-  pkgs,
-  config,
-  ...
-}: let
+{ pkgs, config, ... }:
+let
   git = "${pkgs.git}/bin/git";
   asdfShare = "${pkgs.asdf-vm}/share";
 in {
@@ -18,61 +15,56 @@ in {
   history.size = 10000;
   history.path = "${config.xdg.dataHome}/zsh/history";
 
-  initExtra =
-    ''
-      # Speed up compinit by only checking once a day
-      autoload -Uz compinit
-      if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
-        compinit
-      else
-        compinit -C
-      fi
+  initExtra = ''
+    # Speed up compinit by only checking once a day
+    autoload -Uz compinit
+    if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+      compinit
+    else
+      compinit -C
+    fi
 
-      # Consolidated PATH management
-      export PYENV_ROOT="$HOME/.pyenv"
-      typeset -U path
-      path=(
-        "$HOME/bin"
-        "$HOME/.local/bin.go"
-        "$HOME/.npm/bin"
-        "$HOME/.krew/bin"
-        "$HOME/nonix-bin"
-        "$PYENV_ROOT/bin"(N)
-        $path
-      )
+    # Consolidated PATH management
+    export PYENV_ROOT="$HOME/.pyenv"
+    typeset -U path
+    path=(
+      "$HOME/bin"
+      "$HOME/.local/bin.go"
+      "$HOME/.npm/bin"
+      "$HOME/.krew/bin"
+      "$HOME/nonix-bin"
+      "$PYENV_ROOT/bin"(N)
+      $path
+    )
 
-      # Source secrets
-      source ${config.age.secrets.environment.path}
+    # Source secrets
+    source ${config.age.secrets.environment.path}
 
-      # ASDF setup
-      . "${asdfShare}/asdf-vm/asdf.sh"
-      fpath=(${asdfShare}/asdf-vm/completions $fpath)
-      [[ -d "$HOME/.asdf/plugins/java" ]] && . ~/.asdf/plugins/java/set-java-home.zsh
+    # ASDF setup
+    . "${asdfShare}/asdf-vm/asdf.sh"
+    fpath=(${asdfShare}/asdf-vm/completions $fpath)
+    [[ -d "$HOME/.asdf/plugins/java" ]] && . ~/.asdf/plugins/java/set-java-home.zsh
 
-      # Fast tools - load immediately
-      eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"
-      eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
+    # Fast tools - load immediately
+    eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"
+    eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
 
-      # Deferred completions (loads in background after prompt appears)
-      zsh-defer -c 'source <(${pkgs.kubectl}/bin/kubectl completion zsh)'
+    # Deferred completions (loads in background after prompt appears)
+    zsh-defer -c 'source <(${pkgs.kubectl}/bin/kubectl completion zsh)'
 
-      # Lazy load pyenv (only when called)
-      pyenv() {
-        unfunction pyenv
-        eval "$(command pyenv init -)"
-        [[ -f $PYENV_ROOT/plugins/pyenv-virtualenv/bin/pyenv-virtualenv-init ]] && \
-          eval "$(command pyenv virtualenv-init -)"
-        pyenv "$@"
-      }
+    # Lazy load pyenv (only when called)
+    pyenv() {
+      unfunction pyenv
+      eval "$(command pyenv init -)"
+      [[ -f $PYENV_ROOT/plugins/pyenv-virtualenv/bin/pyenv-virtualenv-init ]] && \
+        eval "$(command pyenv virtualenv-init -)"
+      pyenv "$@"
+    }
 
-    ''
-    + (
-      if pkgs.stdenv.isLinux
-      then ''
-        export OVMF_PATH="${pkgs.OVMF.fd}/FV"
-      ''
-      else ""
-    );
+  '' + (if pkgs.stdenv.isLinux then ''
+    export OVMF_PATH="${pkgs.OVMF.fd}/FV"
+  '' else
+    "");
 
   shellAliases = {
     ls = "${pkgs.eza}/bin/eza --icons --git";
@@ -96,7 +88,8 @@ in {
     netshoot = "k run tmp-shell --rm -i --tty --image nicolaka/netshoot";
     kill-pod = "k delete pod --force --grace-period=0";
 
-    k-pods-count = "${pkgs.kubectl}/bin/kubectl get pods --all-namespaces -o json | jq -r '.items | group_by(.metadata.namespace) | map({\"namespace\": .[0].metadata.namespace, \"running_pods\": map(select(.status.phase == \"Running\")) | length}) | sort_by(.namespace) | .[] | \"(.namespace): (.running_pods)\"'";
+    k-pods-count =
+      "${pkgs.kubectl}/bin/kubectl get pods --all-namespaces -o json | jq -r '.items | group_by(.metadata.namespace) | map({\"namespace\": .[0].metadata.namespace, \"running_pods\": map(select(.status.phase == \"Running\")) | length}) | sort_by(.namespace) | .[] | \"(.namespace): (.running_pods)\"'";
 
     ctar = "${pkgs.gnutar}/bin/tar -czvf";
     otar = "${pkgs.gnutar}/bin/tar -xcf";
@@ -125,7 +118,8 @@ in {
     ga = "${git} add .";
     gap = "${git} add -p";
 
-    gb = "${git} branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
+    gb =
+      "${git} branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
 
     gdc = "${git} diff --cached";
 
@@ -134,6 +128,9 @@ in {
 
     gph = "${git} push";
     gpu = "${git} pull";
+
+    squash-branch =
+      "${git} reset $(${git} merge-base main $(${git} branch --show-current))";
 
     # gitlab
     glopen = "${pkgs.glab}/bin/glab repo view -w";
@@ -156,15 +153,13 @@ in {
     AWS_DEFAULT_REGION = "us-east-1";
   };
 
-  plugins = [
-    {
-      name = "zsh-defer";
-      src = pkgs.fetchFromGitHub {
-        owner = "romkatv";
-        repo = "zsh-defer";
-        rev = "master";
-        sha256 = "sha256-MFlvAnPCknSgkW3RFA8pfxMZZS/JbyF3aMsJj9uHHVU=";
-      };
-    }
-  ];
+  plugins = [{
+    name = "zsh-defer";
+    src = pkgs.fetchFromGitHub {
+      owner = "romkatv";
+      repo = "zsh-defer";
+      rev = "master";
+      sha256 = "sha256-MFlvAnPCknSgkW3RFA8pfxMZZS/JbyF3aMsJj9uHHVU=";
+    };
+  }];
 }

@@ -1,9 +1,4 @@
-{
-  pkgs,
-  agenix,
-  system,
-  ...
-}: {
+{ pkgs, agenix, system, ... }: {
   home.packages = with pkgs;
     [
       # admin tools
@@ -105,36 +100,35 @@
 
       # ai
       ollama
-    ]
-    ++ (
-      if pkgs.stdenv.isLinux
-      then
-        with pkgs; [
-          terraform-docs
-          vagrant
-          spotify-player
-          iw
-          qemu
-          OVMF
-          libvirt
-          virt-viewer
-          virt-manager
-          pciutils
-          glxinfo
-          lshw
 
-          libxslt # for libvirt Terraform
+      regctl
+    ] ++ (if pkgs.stdenv.isLinux then
+      with pkgs; [
+        terraform-docs
+        vagrant
+        spotify-player
+        iw
+        qemu
+        OVMF
+        libvirt
+        virt-viewer
+        virt-manager
+        pciutils
+        glxinfo
+        lshw
 
-          terraform
+        libxslt # for libvirt Terraform
 
-          xclip
+        terraform
 
-          vlc
+        xclip
 
-          opendrop
+        vlc
 
-          file
-        ]
-      else []
-    );
+        opendrop
+
+        file
+      ]
+    else
+      [ ]);
 }
