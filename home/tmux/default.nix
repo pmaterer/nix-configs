@@ -17,14 +17,6 @@
   ];
 
   extraConfig = ''
-    ${
-      if pkgs.stdenv.isDarwin
-      then ''
-        set -g default-command "reattach-to-user-namespace -l zsh"
-      ''
-      else ""
-    }
-
     set -g renumber-windows on
     set -g allow-rename off
     set -gw word-separators ' @"=()[]_-:,.'
@@ -43,6 +35,9 @@
     bind -n M-Right select-pane -R
     bind -n M-Up select-pane -U
     bind -n M-Down select-pane -D
+    # Let shell/vim receive C-k instead of tmux pane switching.
+    unbind -n C-k
+    bind -n C-k send-keys C-k
 
     set -gw monitor-activity on
     set -g visual-activity on
@@ -72,7 +67,7 @@
 
     #set-option -g default-command "reattach-to-user-namespace -l $SHELL"
 
-    set-option -g default-terminal "screen-256color"
+    set-option -g default-terminal "tmux-256color"
 
     # statusbar
     set -g status on

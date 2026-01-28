@@ -32,7 +32,10 @@
   };
 
   services = {
-    displayManager = {defaultSession = "plasma";};
+    displayManager = {
+      defaultSession = "plasma";
+      sddm.enable = true;
+    };
 
     xserver = {
       enable = true;
@@ -41,15 +44,9 @@
         options = "caps:escape";
       };
 
-      displayManager = {lightdm.enable = true;};
-
-      desktopManager = {
-        plasma5.enable = true;
-        enlightenment.enable = true;
-      };
-
       videoDrivers = ["nvidia"];
     };
+    desktopManager.plasma6.enable = true;
     libinput.enable = true;
     openssh.enable = true;
     ntp.enable = true;
@@ -61,7 +58,14 @@
     zsh.enable = true;
     nix-ld = {
       enable = true;
-      libraries = with pkgs; [libgcc glibc];
+      libraries = with pkgs; [
+        libgcc
+        glibc
+        stdenv.cc.cc.lib
+        zlib
+        openssl
+        ncurses
+      ];
     };
   };
 

@@ -35,7 +35,7 @@ in [
   # save/quit
   {
     mode = "n";
-    key = "<C-w>";
+    key = "<leader>q";
     action = ":qa!<cr>";
     options = defaultOptions;
   }

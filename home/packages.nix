@@ -1,6 +1,10 @@
 { pkgs, agenix, system, ... }: {
   home.packages = with pkgs;
     [
+      go-migrate
+      sqlc
+      air
+
       # admin tools
       coreutils
       neofetch

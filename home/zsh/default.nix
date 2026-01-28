@@ -28,6 +28,7 @@ in {
     export PYENV_ROOT="$HOME/.pyenv"
     typeset -U path
     path=(
+      "$HOME/.local/bin"
       "$HOME/bin"
       "$HOME/.local/bin.go"
       "$HOME/.npm/bin"
@@ -149,7 +150,7 @@ in {
     REQUESTS_CA_BUNDLE = config.age.secrets.certs.path;
     SSL_CERT_FILE = config.age.secrets.certs.path;
     #NODE_EXTRA_CA_CERTS = config.age.secrets.certs.path;
-    NODE_EXTRA_CA_CERTS = "~/.certs";
+    NODE_EXTRA_CA_CERTS = config.age.secrets.certs.path;
     AWS_DEFAULT_REGION = "us-east-1";
   };
 

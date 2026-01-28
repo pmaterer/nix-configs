@@ -38,7 +38,8 @@ in {
   signcolumn = "yes";
 
   foldenable = true;
-  foldmethod = "syntax";
+  foldmethod = "expr";
+  foldexpr = "nvim_treesitter#foldexpr()";
   foldlevel = 99; # Ensure that all folds are open by default
   foldnestmax = 3;
 }

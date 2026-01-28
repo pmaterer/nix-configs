@@ -41,7 +41,7 @@
 
       "bin" = {
         source = ./bin;
-        target = "${config.home.homeDirectory}/bin";
+        target = "${config.home.homeDirectory}/.local/bin";
       };
 
       ".direnvrc" = {
@@ -90,6 +90,9 @@
 
           # maximize pane
           keybind = super+enter=text:\x06\x7a
+
+          # ensure Delete sends expected escape sequence
+          keybind = delete=text:\x1b\x5b\x33\x7e
 
           font-family = "IosevkaTerm Nerd Font Mono"
 

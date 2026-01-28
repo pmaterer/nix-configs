@@ -5,8 +5,8 @@
   ...
 }: {
   systemd.services.tailscale-autoconnect = {
-    after = ["network-pre.target" "tailscal.service"];
-    wants = ["network-pre.target" "tailscal.service"];
+    after = ["network-pre.target" "tailscaled.service"];
+    wants = ["network-pre.target" "tailscaled.service"];
     wantedBy = ["multi-user.target"];
 
     serviceConfig.Type = "oneshot";
