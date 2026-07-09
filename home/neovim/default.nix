@@ -9,7 +9,7 @@
     src = pkgs.fetchFromGitHub {
       owner = "pineapplegiant";
       repo = "spaceduck";
-      rev = "main";
+      rev = "350491f19343b24fa85809242089caa02d4dadce";
       sha256 = "sha256-lE8y9BA2a4y0B6O3+NyOS7numoltmzhArgwTAner2fE=";
     };
   };

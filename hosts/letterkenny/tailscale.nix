@@ -5,8 +5,8 @@
   ...
 }: {
   systemd.services.tailscale-autoconnect = {
-    after = ["network-pre.target" "tailscal.service"];
-    wants = ["network-pre.target" "tailscal.service"];
+    after = ["network-pre.target" "tailscaled.service"];
+    wants = ["network-pre.target" "tailscaled.service"];
     wantedBy = ["multi-user.target"];
 
     serviceConfig.Type = "oneshot";
@@ -19,9 +19,7 @@
         exit 0
       fi
 
-      authKey="$(cat ${config.age.secrets.tailscale.path})"
-
-      ${tailscale}/bin/tailscale up --auth-key $authKey
+      ${tailscale}/bin/tailscale up --auth-key file:${config.age.secrets.tailscale.path}
     '';
   };
 }

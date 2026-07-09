@@ -3,22 +3,23 @@
 
   nvim-autopairs.enable = true;
 
-  nvim-colorizer = {
+  colorizer = {
     enable = true;
-    userDefaultOptions.names = false;
+    settings.user_default_options.names = false;
   };
 
   floaterm = {
     enable = true;
-    width = 0.8;
-    height = 0.8;
-    keymaps.toggle = "<leader>,";
+    settings = {
+      width = 0.8;
+      height = 0.8;
+      keymap_toggle = "<leader>,";
+    };
   };
 
   nvim-tree = {
     enable = true;
-    openOnSetupFile = true;
-    autoReloadOnWrite = true;
+    settings.auto_reload_on_write = true;
   };
 
   fugitive.enable = true;
@@ -26,9 +27,12 @@
 
   spectre = {
     enable = true;
-    findPackage = pkgs.ripgrep;
-    replacePackage = pkgs.gnused;
-    settings = { replace = { cmd = "${pkgs.gnused}/bin/sed"; }; };
+    settings = {
+      default = {
+        find.cmd = "${pkgs.ripgrep}/bin/rg";
+        replace.cmd = "${pkgs.gnused}/bin/sed";
+      };
+    };
   };
 
   lualine.enable = true;
@@ -87,7 +91,7 @@
   # LSP
 
   # https://github.com/lukas-reineke/lsp-format.nvim
-  lsp-format.enable = true;
+  lsp-format.enable = false;
   # https://git.sr.ht/~whynothugo/lsp_lines.nvim
   lsp-lines.enable = true;
   lsp = {
@@ -143,11 +147,9 @@
         "nvim_lsp"
         "nvim_lua"
         "git"
-        "emoji"
         "path"
         "buffer"
         "luasnip"
-        "cmdline"
       ];
       mapping = {
         "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";

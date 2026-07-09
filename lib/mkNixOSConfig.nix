@@ -1,18 +1,6 @@
 # NixOS system configuration builder
-{
-  nixpkgs,
-  home-manager,
-  nixvim,
-  agenix,
-  disko,
-  ghostty,
-  hosts,
-}: {
-  system,
-  hostname,
-  email,
-  username,
-}:
+{ nixpkgs, home-manager, nixvim, agenix, disko, ghostty, hosts, catppuccin, }:
+{ system, hostname, email, username, }:
 nixpkgs.lib.nixosSystem {
   inherit system;
   modules = [
@@ -26,6 +14,7 @@ nixpkgs.lib.nixosSystem {
         backupFileExtension = "hm-backup";
         sharedModules = [
           agenix.homeManagerModules.age # add age config
+          catppuccin.homeManagerModules.catppuccin
         ];
         extraSpecialArgs = {
           inherit nixvim agenix system;
@@ -35,8 +24,8 @@ nixpkgs.lib.nixosSystem {
       };
     }
     hosts.nixosModule
-    {networking.stevenBlackHosts.enable = true;}
+    { networking.stevenBlackHosts.enable = true; }
     disko.nixosModules.disko
-    {environment.systemPackages = [ghostty.packages.${system}.default];}
+    { environment.systemPackages = [ ghostty.packages.${system}.default ]; }
   ];
 }

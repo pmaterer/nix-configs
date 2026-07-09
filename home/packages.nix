@@ -1,9 +1,13 @@
 { pkgs, agenix, system, ... }: {
   home.packages = with pkgs;
     [
+      go-migrate
+      sqlc
+      air
+
       # admin tools
       coreutils
-      neofetch
+      fastfetch
       colordiff
       ripgrep
       tree
@@ -33,7 +37,7 @@
 
       # etc
       imagemagick
-      nerdfonts
+      nerd-fonts.gohufont
       cowsay
       ponysay
       fortune
@@ -44,6 +48,7 @@
       # fonts
       monaspace
       fantasque-sans-mono
+      cozette
 
       # git
       ghorg
@@ -64,7 +69,7 @@
       curl
 
       #nix
-      nixfmt-classic
+      nixfmt
       nil # nix lsp
 
       # devops
@@ -77,13 +82,14 @@
       packer
 
       # cloud
-      awscli
+      #awscli
+      awscli2
 
       # k8s
       kubectl
       kubernetes-helm
       kubectx
-      argo
+      argo-workflows
       argocd
       eks-node-viewer
       kubie
@@ -128,6 +134,7 @@
         opendrop
 
         file
+        httpie
       ]
     else
       [ ]);

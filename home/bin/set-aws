@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+CONFIG="${AWS_SSO_CLI_CONFIG:-$HOME/.aws-sso/config.yaml}"
+[[ -f "$CONFIG" ]] || { echo "config not found: $CONFIG" >&2; exit 1; }
+
+selection=$(
+  yq -r '
+    .SSOConfig
+    | to_entries[]
+    | . as $sso
+    | ($sso.key) as $sso_name
+    | ($sso.value.SSORegion // "") as $sso_region
+    | ($sso.value.Accounts // {})
+    | to_entries[]
+    | . as $acct
+    | ($acct.value.Roles // {})
+    | to_entries[]
+    | [
+        $sso_name,
+        $sso_region,
+        ($acct.value.Name // ""),
+        $acct.key,
+        .key,
+        (.value.Profile // "")
+      ]
+    | @tsv
+  ' "$CONFIG" \
+  | fzf --height=20 --reverse --prompt="AWS SSO> " \
+        --delimiter=$'\t' --with-nth=1,3,4,5,6 \
+        --preview='echo "SSO:\t{1}\nSSORegion:\t{2}\nAccount:\t{3} ({4})\nRole:\t{5}\nProfile:\t{6}"'
+) || exit 0
+
+sso_name=$(printf "%s" "$selection" | cut -f1)
+sso_region=$(printf "%s" "$selection" | cut -f2)
+profile=$(printf "%s" "$selection" | cut -f6)
+
+aws-sso login --sso "$sso_name"
+
+printf 'export AWS_PROFILE=%q\n' "$profile"
+printf 'export AWS_REGION=%q\n' "$sso_region"
+printf 'export AWS_DEFAULT_REGION=%q\n' "$sso_region"

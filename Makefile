@@ -16,7 +16,7 @@ update:
 
 .PHONY: fmt
 fmt:
-	@nix run nixpkgs#nixfmt-classic .
+	@nix run nixpkgs#nixfmt -- .
 
 .PHONY: lint
 lint:
@@ -26,13 +26,8 @@ lint:
 check:
 	@nix run "github:DeterminateSystems/flake-checker"
 
-.PHONY: alejandra
-alejandra:
-	@nix run github:kamadorueda/alejandra/3.0.0 .
-
-.PHONY: all 
+.PHONY: all
 all:
 	@make fmt
 	@make lint
 	@make check
-	@make alejandra

@@ -43,5 +43,6 @@ in
         };
       }
       {nixpkgs = {hostPlatform = system;};}
+      {system.primaryUser = username;}
     ];
   }
