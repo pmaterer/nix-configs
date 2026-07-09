@@ -35,7 +35,7 @@ in [
   # save/quit
   {
     mode = "n";
-    key = "<C-w>";
+    key = "<leader>q";
     action = ":qa!<cr>";
     options = defaultOptions;
   }
@@ -101,7 +101,7 @@ in [
   # quote word
   {
     mode = "n";
-    key = "<leader>\"'";
+    key = "<leader>\"";
     action = ''viw<esc>a"<esc>bi"<esc>lel'';
     options = defaultOptions;
   }
@@ -114,7 +114,7 @@ in [
 
   {
     mode = "v";
-    key = "<leader>\"'";
+    key = "<leader>\"";
     action = ''<esc>a"<esc>`<i"<esc>'';
     options = defaultOptions;
   }

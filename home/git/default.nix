@@ -1,36 +1,43 @@
-{
-  pkgs,
-  defaultEmail,
-  ...
-}: {
+{ pkgs, defaultEmail, ... }:
+let
+  credentialHelper = if pkgs.stdenv.isDarwin then
+    "osxkeychain"
+  else if pkgs.stdenv.isLinux then
+    "${pkgs.git-credential-manager}/bin/git-credential-manager"
+  else
+    "";
+in {
   enable = true;
-  package = pkgs.gitAndTools.gitFull;
-  userName = "Patrick Materer";
-  userEmail = defaultEmail;
-  ignores = ["scratch.txt" ".terraform/" ".DS_Store" ".envrc"];
-  aliases = {
-    s = "status";
-    co = "checkout";
-    cob = "checkout -b";
-    del = "branch -D";
-    br = "branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
-    undo = "reset HEAD~1 --mixed";
+  package = pkgs.gitFull;
+  ignores = [ "scratch.txt" ".terraform/" ".DS_Store" ".envrc" ];
+  settings = {
+    user = {
+      name = "Patrick Materer";
+      email = defaultEmail;
+    };
+    alias = {
+      s = "status";
+      co = "checkout";
+      cob = "checkout -b";
+      del = "branch -D";
+      br =
+        "branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate";
+      undo = "reset HEAD~1 --mixed";
 
-    tags = "ls-remote --tags origin";
+      tags = "ls-remote --tags origin";
 
-    log = ''
-      !git log --pretty=format:"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]" --abbrev-commit -30'';
+      log = ''
+        !git log --pretty=format:"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]" --abbrev-commit -30'';
 
-    delete-local-merged = ''
-      !git fetch && git branch --merged | xargs git branch -d
-    '';
+      delete-local-merged = ''
+        !git fetch && git branch --merged | xargs git branch -d
+      '';
 
-    nuke = ''
-      !git branch -D $1 && git push origin :$1
-    '';
-  };
-  # https://blog.gitbutler.com/how-git-core-devs-configure-git/
-  extraConfig = {
+      nuke = ''
+        !git branch -D $1 && git push origin :$1
+      '';
+    };
+    # https://blog.gitbutler.com/how-git-core-devs-configure-git/
     column.ui = "auto";
     branch.sort = "-committerdate";
     tag.sort = "version:refname";
@@ -66,7 +73,7 @@
       updateRefs = true;
     };
 
-    credential.helper = "store";
+    credential.helper = credentialHelper;
     color.ui = true;
   };
 }

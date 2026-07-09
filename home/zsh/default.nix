@@ -4,6 +4,7 @@ let
   asdfShare = "${pkgs.asdf-vm}/share";
 in {
   enable = true;
+  dotDir = "${config.xdg.configHome}/zsh";
 
   enableCompletion = true;
   autosuggestion.enable = true;
@@ -15,7 +16,7 @@ in {
   history.size = 10000;
   history.path = "${config.xdg.dataHome}/zsh/history";
 
-  initExtra = ''
+  initContent = ''
     # Speed up compinit by only checking once a day
     autoload -Uz compinit
     if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
@@ -28,6 +29,7 @@ in {
     export PYENV_ROOT="$HOME/.pyenv"
     typeset -U path
     path=(
+      "$HOME/.local/bin"
       "$HOME/bin"
       "$HOME/.local/bin.go"
       "$HOME/.npm/bin"
@@ -45,9 +47,10 @@ in {
     fpath=(${asdfShare}/asdf-vm/completions $fpath)
     [[ -d "$HOME/.asdf/plugins/java" ]] && . ~/.asdf/plugins/java/set-java-home.zsh
 
-    # Fast tools - load immediately
-    eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"
     eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
+
+    # Deferred tools
+    zsh-defer -c 'eval "$(${pkgs.zoxide}/bin/zoxide init zsh)"'
 
     # Deferred completions (loads in background after prompt appears)
     zsh-defer -c 'source <(${pkgs.kubectl}/bin/kubectl completion zsh)'
@@ -60,6 +63,15 @@ in {
         eval "$(command pyenv virtualenv-init -)"
       pyenv "$@"
     }
+
+    sso() {
+      local out
+      out="$($HOME/.local/bin/set-aws)" || return
+      eval "$out"
+
+      aws sts get-caller-identity
+    }
+
 
   '' + (if pkgs.stdenv.isLinux then ''
     export OVMF_PATH="${pkgs.OVMF.fd}/FV"
@@ -123,8 +135,6 @@ in {
 
     gdc = "${git} diff --cached";
 
-    gpt = ''${git} add . && ${git} commit -m "Testing" && ${git} push'';
-    gpf = ''${git} add . && ${git} commit -m "Fixes" && ${git} push'';
 
     gph = "${git} push";
     gpu = "${git} pull";
@@ -133,7 +143,7 @@ in {
       "${git} reset $(${git} merge-base main $(${git} branch --show-current))";
 
     # gitlab
-    glopen = "${pkgs.glab}/bin/glab repo view -w";
+    glopen = "glab repo view -w";
 
     glm = ''
       ${pkgs.ollama}/bin/ollama run llama3 "$(cat ~/.config/prompts/git-commit-message.txt) $(git diff)"'';
@@ -149,7 +159,7 @@ in {
     REQUESTS_CA_BUNDLE = config.age.secrets.certs.path;
     SSL_CERT_FILE = config.age.secrets.certs.path;
     #NODE_EXTRA_CA_CERTS = config.age.secrets.certs.path;
-    NODE_EXTRA_CA_CERTS = "~/.certs";
+    NODE_EXTRA_CA_CERTS = config.age.secrets.certs.path;
     AWS_DEFAULT_REGION = "us-east-1";
   };
 
@@ -158,7 +168,7 @@ in {
     src = pkgs.fetchFromGitHub {
       owner = "romkatv";
       repo = "zsh-defer";
-      rev = "master";
+      rev = "53a26e287fbbe2dcebb3aa1801546c6de32416fa";
       sha256 = "sha256-MFlvAnPCknSgkW3RFA8pfxMZZS/JbyF3aMsJj9uHHVU=";
     };
   }];

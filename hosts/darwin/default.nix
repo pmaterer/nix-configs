@@ -1,7 +1,5 @@
-{ pkgs, ... }: {
-  services = { nix-daemon.enable = true; };
-
-  security.pam.enableSudoTouchIdAuth = true;
+{ pkgs, config, ... }: {
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   environment.shells = with pkgs; [ bash zsh ];
   # Creates /etc/zshrc that load the nix-darwin environment
@@ -34,19 +32,18 @@
       "homebrew/services"
       "int128/kubelogin"
       "FelixKratz/formulae"
-      "oven-sh/bun"
+      "minamijoyo/hcledit"
     ];
     brews = [
       "glab"
-      "oidc-kubelogin"
-      "terraform-docs"
+      "int128/kubelogin/oidc-kubelogin"
       "doggo"
       "qemu"
       # "spotify_player"
       "opa"
       "terragrunt"
       "golangci-lint"
-      "gnu-sed" # needed by nvim-spectre
+      "postgresql"
       "postgresql@17"
       {
         name = "libvirt";
@@ -54,27 +51,27 @@
         restart_service = true;
       }
       "llm"
-      "sketchybar"
-      "bun"
+      "felixkratz/formulae/sketchybar"
       "kind"
       "reattach-to-user-namespace"
       "grc"
       "aws-sso-cli"
       "kubeconform"
       "colima"
-      "steipete/tap/gogcli"
+      "libpq"
+      "minamijoyo/hcledit/hcledit"
     ];
     casks = [
-      "alacritty"
+      "claude-code"
       "bitwarden"
       #"docker"
       "firefox"
       "maccy"
-      "postgres-unofficial"
+      "postgres-app"
       "rectangle"
       "spotify"
       "visual-studio-code"
-      "wireshark"
+      "wireshark-app"
       "xscreensaver"
       "notion"
       "stats"
@@ -82,9 +79,7 @@
       "gimp"
       "wezterm"
       "ghostty"
-      "raycast"
       "flashspace"
-      "amazon-q"
       "inkscape"
     ];
   };
@@ -138,7 +133,7 @@
         TrackpadThreeFingerDrag = true;
       };
 
-      screencapture.location = "${builtins.getEnv "HOME"}/screenshots";
+      screencapture.location = "/Users/${config.system.primaryUser}/screenshots";
       finder = {
         ShowPathbar = true;
         ShowStatusBar = true;
